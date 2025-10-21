@@ -213,7 +213,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 // Xử lý đăng ký
                                 print('Email: ${_emailController.text}');
                                 print('Password: ${_passwordController.text}');
-                                final success = await controller.Register(
+                                final success = await controller.register(
                                     _phoneController.text,
                                     _emailController.text,
                                     _userNameController.text,

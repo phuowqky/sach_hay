@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../core/di/common_features.dart';
 import '../core/network/api_service/api_service.dart';
@@ -11,9 +13,13 @@ import '../view/widget/custom_toast.dart';
 
 class AuthController extends GetxController {
   Rx<String> message = "".obs;
+  final isLoading = false.obs;
 
   final apiService = getIt<ApiService>();
+
+
   Future<bool> login(String email, String password) async {
+
     if (email.isEmpty || password.isEmpty) {
       message.value = "Please enter all required information.";
       return false;
@@ -35,21 +41,18 @@ class AuthController extends GetxController {
         log('Token: ${res.data!.token}');
         await UserStorage.saveUserId(res.data!.user?.id ?? "");
         log("Id User: ${res.data!.user?.id}");
-        CustomToast.showSuccess("${res.message}");
         return true;
       } else {
         log('Login failed: ${res.message}');
-        CustomToast.showError("${res.message}");
         return false;
       }
-    } catch (e) {
-      log('Login error: $e');
-      CustomToast.showError("An error occurred, please try again");
+    } catch (e, stack) {
+      log('Login error: $e, stack: $stack');
       return false;
     }
   }
 
-  Future<bool> Register(String phone, String email, String userName,
+  Future<bool> register(String phone, String email, String userName,
       String password, String confirmPassword) async {
     UserModel user = UserModel(
         phone: phone,
@@ -57,6 +60,7 @@ class AuthController extends GetxController {
         email: email,
         password: password,
         confirmPassword: confirmPassword);
+
     try {
       var res = await apiService.Register(user);
       if (res.success) {
@@ -72,6 +76,28 @@ class AuthController extends GetxController {
       log("Error fetch register $e, stack: $stack");
       CustomToast.showError("An error occurred, please try again");
       return false;
-    } finally {}
+    } finally {
+      isLoading .value = false;
+    }
+  }
+
+
+  Future<void> handelLogin(BuildContext context, String email, String password) async {
+    if (isLoading.value) return;
+    isLoading.value = true;
+
+    try {
+      final success = await login(email, password);
+      if (success) {
+        CustomToast.showSuccess("Login successfully");
+        context.go('/home_screen');
+      } else {
+        CustomToast.showError("Login failed");
+      }
+    } catch (e) {
+      CustomToast.showError("An unexpected error occurred");
+    } finally {
+      isLoading.value = false;
+    }
   }
 }
