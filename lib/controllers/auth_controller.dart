@@ -9,11 +9,12 @@ import '../core/di/common_features.dart';
 import '../core/network/api_service/api_service.dart';
 import '../data/models/login/login_model.dart';
 import '../data/storage/user_storage.dart';
-import '../view/widget/custom_toast.dart';
 
 class AuthController extends GetxController {
   Rx<String> message = "".obs;
   final isLoading = false.obs;
+  final isSuccess = false.obs;
+  final successText = ''.obs;
 
   final apiService = getIt<ApiService>();
 
@@ -65,16 +66,13 @@ class AuthController extends GetxController {
       var res = await apiService.Register(user);
       if (res.success) {
         log("fetch register successfully $res");
-        CustomToast.showSuccess("${res.message}");
         return true;
       } else {
         log("Falled fetch register $res");
-        CustomToast.showError("${res.message}");
         return false;
       }
     } catch (e, stack) {
       log("Error fetch register $e, stack: $stack");
-      CustomToast.showError("An error occurred, please try again");
       return false;
     } finally {
       isLoading .value = false;
@@ -89,15 +87,45 @@ class AuthController extends GetxController {
     try {
       final success = await login(email, password);
       if (success) {
-        CustomToast.showSuccess("Login successfully");
+        isSuccess.value = true;
+        successText.value = 'Đăng nhập thành công';
+        await Future.delayed(const Duration(milliseconds: 800));
         context.go('/home_screen');
       } else {
-        CustomToast.showError("Login failed");
+        isSuccess.value = false;
+        successText.value = 'Đăng nhập thất bại';
       }
     } catch (e) {
-      CustomToast.showError("An unexpected error occurred");
+      isSuccess.value = false;
+      successText.value = 'Có lỗi xảy ra, vui lòng thử lại';
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> handleRegister(BuildContext context, String phone, String email,
+      String userName, String password, String confirmPassword) async {
+    if (isLoading.value) return;
+    isLoading.value = true;
+
+    try {
+      final success = await register(
+          phone, email, userName, password, confirmPassword);
+      if (success) {
+        isSuccess.value = true;
+        successText.value = 'Đăng ký thành công';
+        await Future.delayed(const Duration(milliseconds: 800));
+        context.go('/login_screen');
+      }else{
+        isSuccess.value = false;
+        successText.value = 'Đăng ký thất bại';
+      }
+    } catch (e) {
+      isSuccess.value = false;
+      successText.value = 'Có lỗi xảy ra, vui lòng thử lại';
+    } finally {
+      isLoading.value = false;
+      isSuccess.value = false;
     }
   }
 }

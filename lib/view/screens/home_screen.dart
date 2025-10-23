@@ -22,8 +22,8 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Icon(Icons.menu, color: AppColors.black, size: AppSizes.icon28),
         ),
         // title: const Text(
@@ -36,8 +36,8 @@ class HomeScreen extends StatelessWidget {
         // ),
         title: Text('Sách Hay', style: AppTextStyles.h4,),
         actions: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Icon(Icons.search, color: AppColors.black, size: AppSizes.icon28),
           ),
           Padding(
@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: AppSizes.space16),
+            SizedBox(height: AppSizes.space16),
             
             // Welcome Banner
             Container(
@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Chào buổi sáng, bạn đọc!',
                     style: AppTextStyles.h1,
                   ),
@@ -77,11 +77,11 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 24),
+             SizedBox(height: AppSizes.space32),
 
             // Sách nổi bật
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 'Sách nổi bật',
                 style: AppTextStyles.h4,
@@ -116,10 +116,10 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: AppSizes.space24),
+            SizedBox(height: AppSizes.space24),
 
             // Sách thịnh hành
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSizes.space16),
               child: Text(
                 'Sách thịnh hành',
@@ -131,7 +131,7 @@ class HomeScreen extends StatelessWidget {
               height: 240,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: AppSizes.space16),
+                padding: EdgeInsets.symmetric(horizontal: AppSizes.space16),
                 children: [
                   _buildBookCard(
                     'CUỘC SỐNG\nKHÔNG GIỚI\nHẠN',
@@ -155,17 +155,17 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: AppSizes.space24),
+            SizedBox(height: AppSizes.space24),
 
             // Khám phá thể loại
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSizes.space16),
               child: Text(
                 'Khám phá thể loại',
                 style: AppTextStyles.h4,
               ),
             ),
-            const SizedBox(height: AppSizes.space12),
+            SizedBox(height: AppSizes.space12),
             // Padding(
             //   padding: const EdgeInsets.symmetric(horizontal: 16),
             //   child: Row(
@@ -186,22 +186,22 @@ class HomeScreen extends StatelessWidget {
               route: '/bookscreen',
             ),
 
-            const SizedBox(height: AppSizes.space24),
+            SizedBox(height: AppSizes.space24),
 
             // Mới thêm
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSizes.space16),
               child: Text(
                 'Mới thêm',
                 style: AppTextStyles.h4,
               ),
             ),
-            const SizedBox(height: AppSizes.space12),
+            SizedBox(height: AppSizes.space12),
             SizedBox(
               height: 240,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: AppSizes.space16),
+                padding: EdgeInsets.symmetric(horizontal: AppSizes.space16),
                 children: [
                   _buildBookCard(
                     'TRẠNG\nCÁ TRÊ\nTHÁI',
@@ -387,7 +387,7 @@ class CategoryItem extends StatelessWidget {
           children: [
             Icon(icon, color: AppColors.primaryLight, size: 28),
     
-            const SizedBox(height: AppSizes.space8),
+            SizedBox(height: AppSizes.space8),
             Text(
               label,
               style: AppTextStyles.bodySmall.copyWith(color: AppColors.primaryLight)

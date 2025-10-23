@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sach_hay/view/widget/loading_overlay_widget.dart';
@@ -25,6 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final controller = Get.put<AuthController>(AuthController());
+  final _emailFocus = FocusNode();
+  final _passwordFocus = FocusNode();
 
   @override
   void dispose() {
@@ -41,71 +43,100 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Obx(() {
         return LoadingOverlay(
             isLoading: controller.isLoading.value,
+          successText: controller.successText.value,
           loadingText: "Đang đăng nhập...",
+
           child: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(AppSizes.space24),
+                padding: EdgeInsets.all(AppSizes.space24),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     children: [
-                      const SizedBox(height: AppSizes.space60),
+                      SizedBox(height: AppSizes.space60),
           
                       // Logo
-                      SvgPicture.asset(
-                        'assets/icons/ebook_01.svg',
+                      Image.asset(
+                        'assets/images/reading-book.png',
                         height: 60,
                       ),
           
-                      const SizedBox(height: AppSizes.space40),
+                      SizedBox(height: AppSizes.space40),
           
                       // Title
-                      const Text(
-                        'Login to your Account',
+                      Text(
+                        'Đăng nhập',
                         style: AppTextStyles.h3,
                       ),
           
-                      const SizedBox(height: AppSizes.space32),
+                      SizedBox(height: AppSizes.space32),
           
                       // Email Field
                       CustomTextField(
                         labelText: 'Email',
-                        hintText: 'Enter your email',
+                        focusNode: _emailFocus,
+                        textInputAction: TextInputAction.next,
+                        hintText: 'Nhập email của bạn',
+                        // controller: _emailController,
+                        onFieldSubmitted: (_) =>
+                            FocusScope.of(context).requestFocus(_passwordFocus),
                         controller: _emailController,
+
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
+                            return 'Vui lòng nhập email của bạn';
                           }
                           if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
                               .hasMatch(value)) {
-                            return 'Please enter a valid email';
+                            return 'Vui lòng nhập email hợp lệ';
                           }
                           return null;
                         },
                       ),
           
-                      const SizedBox(height: AppSizes.space20),
+                      SizedBox(height: AppSizes.space20),
           
                       // Password Field
                       CustomTextField(
                         labelText: 'Password',
-                        hintText: 'Enter your password',
+                        textInputAction: TextInputAction.done,
+                        focusNode: _passwordFocus,
+                        hintText: 'Nhập mật khẩu của bạn',
                         controller: _passwordController,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context).unfocus(); // ẩn bàn phím khi nhấn done
+                        },
                         obscureText: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
+                            return 'Vui lòng nhập mật khẩu của bạn';
                           }
                           if (value.length < 6) {
-                            return 'Password must be at least 6 characters';
+                            return 'Mật khẩu phải có ít nhất 6 ký tự';
                           }
                           return null;
                         },
                       ),
+
+                      InkWell(
+                        onTap: () {
+                          // context.push('/forgot_password_screen');
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 12.h),
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            'Quên mật khẩu?',
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ),
+                      ),
           
-                      const SizedBox(height: AppSizes.space32),
+                      // const SizedBox(height: AppSizes.space32),
           
                       // Sign In Button
                       SizedBox(
@@ -117,26 +148,26 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
                             foregroundColor: AppColors.background,
-                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            padding: EdgeInsets.symmetric(vertical: 16.h),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(8.r),
                             ),
                             elevation: 0,
                           ),
-                          child: const Text(
-                            'Login in',
+                          child: Text(
+                            'Đăng nhập',
                             style: AppTextStyles.buttonLarge,
                           ),
                         ),
                       ),
           
-                      const SizedBox(height: AppSizes.space44),
+                      SizedBox(height: AppSizes.space44),
           
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Don't have an account? ",
+                            "Bạn chưa có tài khoản? ",
                             style: AppTextStyles.bodyMedium.copyWith(
                               color: AppColors.textSecondary,
                             ),
@@ -146,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               context.push('/signup_screen');
                             },
                             child: Text(
-                              'Sign up',
+                              'Đăng ký',
                               style: AppTextStyles.bodyMedium.copyWith(
                                 color: AppColors.primary,
                                 fontWeight: FontWeight.w600,
@@ -156,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
           
-                      const SizedBox(height: AppSizes.space20),
+                      SizedBox(height: AppSizes.space20),
                     ],
                   ),
                 ),
@@ -175,8 +206,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 50,
-        height: 50,
+        width: 50.w,
+        height: 50.h,
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.grey200),
           borderRadius: BorderRadius.circular(AppSizes.radius8),
