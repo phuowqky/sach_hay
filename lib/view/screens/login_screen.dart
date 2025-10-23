@@ -79,8 +79,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         textInputAction: TextInputAction.next,
                         hintText: 'Nhập email của bạn',
                         // controller: _emailController,
-                        onFieldSubmitted: (_) =>
-                            FocusScope.of(context).requestFocus(_passwordFocus),
+                        // onFieldSubmitted: (_) =>
+                        //     FocusScope.of(context).requestFocus(_passwordFocus),
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context).requestFocus(_passwordFocus);
+                        },
                         controller: _emailController,
 
                         keyboardType: TextInputType.emailAddress,

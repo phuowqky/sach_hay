@@ -24,7 +24,7 @@ class StartScreen extends StatelessWidget {
               // Logo
               Image.asset(
                 'assets/images/reading-book.png', // Thay thế bằng logo thực tế
-                height: 220,
+                height: 220.h,
               )
             ],
           ),

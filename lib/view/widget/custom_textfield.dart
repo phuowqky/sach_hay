@@ -108,15 +108,28 @@ class _CustomTextFieldState extends State<CustomTextField> {
           maxLines: widget.maxLines,
           enabled: widget.enabled,
           textInputAction: widget.textInputAction,
+          // onFieldSubmitted: (value) {
+          //   // Gọi callback nếu có
+          //   widget.onFieldSubmitted?.call(value);
+          //
+          //   // Xử lý focus logic
+          //   if (widget.textInputAction == TextInputAction.next) {
+          //     FocusScope.of(context).nextFocus();
+          //   } else if (widget.textInputAction == TextInputAction.done) {
+          //     FocusScope.of(context).unfocus();
+          //   }
+          // },
           onFieldSubmitted: (value) {
-            // Gọi callback nếu có
-            widget.onFieldSubmitted?.call(value);
-
-            // Xử lý focus logic
-            if (widget.textInputAction == TextInputAction.next) {
-              FocusScope.of(context).nextFocus();
-            } else if (widget.textInputAction == TextInputAction.done) {
-              FocusScope.of(context).unfocus();
+            // Ưu tiên callback từ parent widget
+            if (widget.onFieldSubmitted != null) {
+              widget.onFieldSubmitted?.call(value);
+            } else {
+              // Chỉ tự động xử lý nếu không có callback custom
+              if (widget.textInputAction == TextInputAction.next) {
+                FocusScope.of(context).nextFocus();
+              } else if (widget.textInputAction == TextInputAction.done) {
+                FocusScope.of(context).unfocus();
+              }
             }
           },
           style: widget.textStyle ??

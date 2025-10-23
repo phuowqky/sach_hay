@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
@@ -29,6 +28,10 @@ class _SignupScreenState extends State<SignupScreen> {
   final _yearOfBirthController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final controller = Get.put<AuthController>(AuthController());
+  final _passwordFocus = FocusNode();
+  final _emailFocus = FocusNode();
+  final _userNameFocus = FocusNode();
+  final _phoneFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +74,9 @@ class _SignupScreenState extends State<SignupScreen> {
                           hintText: 'Nhập email của bạn',
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
+                          onFieldSubmitted: (_) {
+                            FocusScope.of(context).requestFocus(_userNameFocus);
+                          },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Vui lòng nhập email của bạn';
@@ -87,9 +93,13 @@ class _SignupScreenState extends State<SignupScreen> {
 
                         CustomTextField(
                           labelText: 'Tên người dùng',
+                          focusNode: _userNameFocus,
                           textInputAction: TextInputAction.next,
                           hintText: 'Nhập tên người dùng',
                           controller: _userNameController,
+                          onFieldSubmitted: (_) {
+                            FocusScope.of(context).requestFocus(_phoneFocus);
+                          },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Vui lòng nhập tên người dùng';
@@ -106,9 +116,13 @@ class _SignupScreenState extends State<SignupScreen> {
                         CustomTextField(
                           labelText: 'Số điện thoại',
                           textInputAction: TextInputAction.next,
+                          focusNode: _phoneFocus,
                           hintText: 'Nhập số điện thoại của bạn',
                           controller: _phoneController,
                           keyboardType: TextInputType.phone,
+                          onFieldSubmitted: (_) {
+                            FocusScope.of(context).requestFocus(_passwordFocus);
+                          },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Vui lòng nhập số điện thoại của bạn';
@@ -125,7 +139,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         CustomTextField(
                           labelText: 'Mật khẩu',
                           textInputAction: TextInputAction.next,
+
                           hintText: 'Vui lòng nhập mật khẩu',
+                          focusNode: _passwordFocus,
                           obscureText: true,
                           controller: _passwordController,
                           validator: (value) {
