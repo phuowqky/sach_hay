@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,15 +15,15 @@ class StartScreen extends StatelessWidget {
         child: Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: EdgeInsets.all(24.0.r),
         child: Center(
           child: Column(
             // crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Logo
-              SvgPicture.asset(
-                'assets/icons/ebook_01.svg', // Thay thế bằng logo thực tế
+              Image.asset(
+                'assets/images/reading-book.png', // Thay thế bằng logo thực tế
                 height: 220,
               )
             ],

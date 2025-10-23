@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:path/path.dart';
@@ -34,14 +35,25 @@ class _AppPageState extends State<AppPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _router,
-      debugShowCheckedModeBanner: false,
-      // locale: const Locale('vi', 'VN'),
-      localizationsDelegates: const [],
-      // supportedLocales: const [
-      //   Locale('vi', 'VN'),
-      // ],
+    return ScreenUtilInit(
+      designSize: const Size(390, 844), // iPhone 12 Pro kích thước tham chiếu
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+      return MaterialApp.router(
+        routerConfig: _router,
+        debugShowCheckedModeBanner: false,
+        builder: (context, widget) {
+          // Quan trọng: gắn MediaQuery để cập nhật scale cho toàn app
+          // ScreenUtil.setContext(context);
+          return widget!;
+        },
+        // locale: const Locale('vi', 'VN'),
+        localizationsDelegates: const [],
+        // supportedLocales: const [
+        //   Locale('vi', 'VN'),
+        // ],
+      );}
     );
   }
 
