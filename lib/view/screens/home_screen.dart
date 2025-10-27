@@ -6,12 +6,13 @@ import 'package:sach_hay/controllers/home_controller.dart';
 import 'package:sach_hay/core/theme/app_colors.dart';
 import 'package:sach_hay/core/theme/app_sizes.dart';
 import 'package:sach_hay/core/theme/app_text_styles.dart';
-import 'package:sach_hay/view/screens/book_screen.dart';
+
 
 
 class HomeScreen extends StatelessWidget {
   static const String homeScreen = '/home_screen';
-  const HomeScreen({Key? key}) : super(key: key);
+   HomeScreen({Key? key}) : super(key: key);
+  final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -88,32 +89,82 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            SizedBox(
-              height: 240,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: [
-                  _buildBookCard(
-                    'THE\nWOMAN\nIN ME',
-                    'Britney Spears',
-                    Colors.pink[200]!,
-                    Colors.white,
-                  ),
-                  _buildBookCard(
-                    'HOW TO\nWIN\nFRIENDS &\nINFLUENCE\nPEOPLE',
-                    'Dale Carnegie',
-                    Colors.deepOrange[400]!,
-                    Colors.white,
-                  ),
-                  _buildBookCard(
-                    'Sample\nBook',
-                    'Author Name',
-                    Colors.blue[200]!,
-                    Colors.white,
-                  ),
-                ],
-              ),
+            Obx(() {
+              if (controller.isLoading.value) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              if (controller.trendingBooks.isEmpty) {
+                return const Center(child: Text('Không có sách nổi bật'));
+              }
+              return SizedBox(
+                height: 240,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: controller.trendingBooks.length,
+                  itemBuilder: (context, index) {
+                    final book = controller.trendingBooks[index];
+                    return Card(
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Ảnh bìa
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.network(
+                              book.coverImage ?? '',
+                              width: 100,
+                              height: 140,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+
+                          // Thông tin sách
+                          SizedBox(
+                            width: 160,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  book.title ?? '',
+                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(
+                                  book.author ?? '',
+                                  style: const TextStyle(color: Colors.grey),
+                                ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  children: [
+                                    Icon(Icons.star, color: Colors.amber, size: 16),
+                                    Text('${book.averageRating ?? 0}'),
+                                    Text(' (${book.totalReviews ?? 0} reviews)'),
+                                  ],
+                                ),
+                                const SizedBox(height: 4),
+                                Text('Thể loại: ${book.category ?? ''}'),
+                                Text('Năm: ${book.publishYear ?? ''}'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                    // return _buildBookCard(
+                    //   book['title']!,
+                    //   book['author']!,
+                    //   book['bgColor']!,
+                    //   book['textColor']!,
+                    // );
+                  },
+                ),
+              );}
             ),
 
             SizedBox(height: AppSizes.space24),
@@ -129,30 +180,64 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 12),
             SizedBox(
               height: 240,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(horizontal: AppSizes.space16),
-                children: [
-                  _buildBookCard(
-                    'CUỘC SỐNG\nKHÔNG GIỚI\nHẠN',
-                    'Nick Vujicic',
-                    Colors.lightBlue[200]!,
-                    Colors.black87,
-                  ),
-                  _buildBookCard(
-                    'MẬT MÃ\nDA VINCI',
-                    'Dan Brown',
-                    Colors.orange[900]!,
-                    Colors.white,
-                  ),
-                  _buildBookCard(
-                    'Sample\nBook',
-                    'Author Name',
-                    Colors.green[200]!,
-                    Colors.black87,
-                  ),
-                ],
-              ),
+              // child: ListView(
+              //   scrollDirection: Axis.horizontal,
+              //   padding: EdgeInsets.symmetric(horizontal: AppSizes.space16),
+              //   children: [
+              //     _buildBookCard(
+              //       'CUỘC SỐNG\nKHÔNG GIỚI\nHẠN',
+              //       'Nick Vujicic',
+              //       Colors.lightBlue[200]!,
+              //       Colors.black87,
+              //     ),
+              //     _buildBookCard(
+              //       'MẬT MÃ\nDA VINCI',
+              //       'Dan Brown',
+              //       Colors.orange[900]!,
+              //       Colors.white,
+              //     ),
+              //     _buildBookCard(
+              //       'Sample\nBook',
+              //       'Author Name',
+              //       Colors.green[200]!,
+              //       Colors.black87,
+              //     ),
+              //   ],
+              // ),
+
+              child: Obx(() {
+                if(controller.isLoading.value){
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if(controller.isLoading.value){
+                  return const Center(child: Text('Không có sách thịnh hành'));
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.symmetric(horizontal: AppSizes.space16),
+                  itemCount: controller.randomBooks.length,
+                  itemBuilder: (context, index) {
+                    final trendingBook = controller.randomBooks[index];
+                    return Container(
+                      child: Column(
+                        children: [
+                          Image.network(
+                            trendingBook.coverImage ?? '',
+                            width: 130,
+                            height: 170,
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            trendingBook.title ?? '',
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,))
+                        ],
+                      ));
+                  },
+                );
+              }),
             ),
 
             SizedBox(height: AppSizes.space24),
@@ -180,10 +265,56 @@ class HomeScreen extends StatelessWidget {
             //     ],
             //   ),
             // ),
-            const CategoryItem(
-              icon: Icons.book,
-              label: 'Tất cả',
-              route: '/bookscreen',
+            Container(
+              margin: EdgeInsets.all(8),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: CategoryItem(
+                            icon: Icons.book,
+                            label: 'Tất cả',
+                            route: '/bookscreen',
+                          ),
+                        ),
+
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: CategoryItem(icon: Icons.favorite_border, label: 'Lãng mạn'),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: CategoryItem(icon: Icons.library_books, label: 'Tiểu thuyết'),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CategoryItem(icon: Icons.favorite_border, label: 'Lãng mạn'),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CategoryItem(icon: Icons.description, label: 'Lịch sử'),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CategoryItem(icon: Icons.access_alarms_sharp, label: 'Lịch sử'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
 
             SizedBox(height: AppSizes.space24),
@@ -197,32 +328,64 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: AppSizes.space12),
-            SizedBox(
-              height: 240,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(horizontal: AppSizes.space16),
-                children: [
-                  _buildBookCard(
-                    'TRẠNG\nCÁ TRÊ\nTHÁI',
-                    'Tác giả',
-                    Colors.red[900]!,
-                    Colors.white,
-                  ),
-                  _buildBookCard(
-                    'CÓ AI TRỞ\nVỀ KHÔNG',
-                    'Tác giả',
-                    Colors.grey[900]!,
-                    Colors.white,
-                  ),
-                  _buildBookCard(
-                    'Sample\nBook',
-                    'Author Name',
-                    Colors.purple[200]!,
-                    Colors.black87,
-                  ),
-                ],
-              ),
+            Obx((){
+              if(controller.isLoading.value){
+                return const Center(child: CircularProgressIndicator());
+              }
+              if(controller.newBooks.isEmpty){
+                return const Center(child: Text('Không có sách mới'));
+              }
+              return SizedBox(
+                height: 240,
+                // child: ListView(
+                //   scrollDirection: Axis.horizontal,
+                //   padding: EdgeInsets.symmetric(horizontal: AppSizes.space16),
+                //   children: [
+                //     _buildBookCard(
+                //       'TRẠNG\nCÁ TRÊ\nTHÁI',
+                //       'Tác giả',
+                //       Colors.red[900]!,
+                //       Colors.white,
+                //     ),
+                //     _buildBookCard(
+                //       'CÓ AI TRỞ\nVỀ KHÔNG',
+                //       'Tác giả',
+                //       Colors.grey[900]!,
+                //       Colors.white,
+                //     ),
+                //     _buildBookCard(
+                //       'Sample\nBook',
+                //       'Author Name',
+                //       Colors.purple[200]!,
+                //       Colors.black87,
+                //     ),
+                //   ],
+                // ),
+
+                child: ListView.builder(
+                  scrollDirection:  Axis.horizontal,
+                  itemCount: controller.newBooks.length,
+                  itemBuilder: (context, index) {
+                    final newBook = controller.newBooks[index];
+                    return Container(child: Column(
+                      children: [
+                        Image.network(
+                          newBook.coverImage ?? '',
+                          width: 130,
+                          height: 170,
+                          fit: BoxFit.cover,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          newBook.title ?? '',
+                          style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,))
+                      ],
+                    ));
+                  },
+                )
+              );}
             ),
             const SizedBox(height: 100),
           ],
@@ -231,7 +394,7 @@ class HomeScreen extends StatelessWidget {
       bottomNavigationBar: Obx(
         () {
           return BottomNavigationBar(
-            backgroundColor: AppColors.primary,
+            backgroundColor: AppColors.white,
             currentIndex: controller.selectedIndex.value,
             onTap: controller.changeTab,
             type: BottomNavigationBarType.fixed,
@@ -379,7 +542,7 @@ class CategoryItem extends StatelessWidget {
         height: 100,
         width: 100,
         decoration: BoxDecoration(
-          color: AppColors.grey200,
+          color: AppColors.grey100,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(

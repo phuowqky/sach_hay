@@ -19,15 +19,37 @@ class ContentBookController extends GetxController {
 
   void onInit() {
     super.onInit();
-    getChapterContent();
+    // getChapterContent();
     }
 
-  Future<void> getChapterContent() async {
+  // Future<void> getChapterContent() async {
+  //   isLoading.value = true;
+  //   //   final index = await BookStorage.getSelectIndexChapter();
+  //   // final bookId = await UserStorage.getBookId();
+  //   final index = 40;
+  //   final bookId = "68f28ae4ae9e790e0d2a91c1";
+  //   try {
+  //     final response = await apiService.getChapterContent(bookId, index);
+  //     if (response.success) {
+  //       log("Get chapter content successfully $response");
+  //       bookTitle.value = response.bookTitle ?? '';
+  //       chapterIndex.value = response.chapterIndex ?? 0;
+  //       chapterTitle.value = response.chapterTitle ?? '';
+  //       content.value = response.content ?? '';
+  //     } else {
+  //       print("getContentBook failed: $response");
+  //     }
+  //   } catch (e, stack) {
+  //     print("Error getting content book: $e, stack: $stack");
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
+
+// Bây giờ hàm nhận bookId và index
+  Future<void> getChapterContent({required String bookId, required int index}) async {
     isLoading.value = true;
-    //   final index = await BookStorage.getSelectIndexChapter();
-    // final bookId = await UserStorage.getBookId();
-    final index = 40;
-    final bookId = "68f28ae4ae9e790e0d2a91c1";
+    errorMessage.value = '';
     try {
       final response = await apiService.getChapterContent(bookId, index);
       if (response.success) {
@@ -37,10 +59,13 @@ class ContentBookController extends GetxController {
         chapterTitle.value = response.chapterTitle ?? '';
         content.value = response.content ?? '';
       } else {
-        print("getContentBook failed: $response");
+        // nếu API trả success = false, gán lỗi để UI hiện
+        // errorMessage.value = response.message ?? 'Lỗi khi lấy chương sách';
+        log('getChapterContent failed: $response');
       }
     } catch (e, stack) {
-      print("Error getting content book: $e, stack: $stack");
+      errorMessage.value = 'Lỗi: $e';
+      log("Error getting content book: $e, stack: $stack");
     } finally {
       isLoading.value = false;
     }

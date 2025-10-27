@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:sach_hay/controllers/content_book_controller.dart';
 
 class ReadingChapterScreen extends StatefulWidget {
-  const ReadingChapterScreen({super.key});
+  final String bookId;
+  final int chapterIndex;
+  const ReadingChapterScreen({super.key, required this.bookId, required this.chapterIndex});
 
   @override
   State<ReadingChapterScreen> createState() => _ReadingChapterScreenState();
@@ -15,12 +17,43 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
 
   double _fontSize = 18.0;
   bool _showSettings = false;
-
   @override
   void initState() {
     super.initState();
-    controller.getChapterContent();
+
+    // ✅ Gọi API lấy nội dung chương ngay khi vào màn hình
+    controller.getChapterContent(
+      bookId: widget.bookId,
+      index: widget.chapterIndex,
+    );
   }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   controller.getChapterContent();
+  // }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //
+  //   // Lấy arguments được gửi từ màn trước
+  //   final args = Get.arguments;
+  //   String? bookId;
+  //   int? index;
+  //
+  //   if (args != null && args is Map) {
+  //     bookId = args['bookId'] as String?;
+  //     index = args['index'] as int?;
+  //   }
+  //
+  //   if (bookId != null && index != null) {
+  //     // gọi controller với bookId và index
+  //     controller.getChapterContent(bookId: bookId, index: index);
+  //   } else {
+  //     // fallback: nếu không có args, bạn có thể gọi hàm mặc định hoặc hiển thị lỗi
+  //     controller.errorMessage.value = 'Không tìm thấy thông tin chương để mở';
+  //   }
+  // }
 
   @override
   void dispose() {
@@ -102,7 +135,8 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: controller.getChapterContent,
+                  onPressed: (){},
+                  // onPressed: controller.getChapterContent,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF8B4513),
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),

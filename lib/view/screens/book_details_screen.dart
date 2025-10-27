@@ -7,12 +7,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sach_hay/controllers/book_controller.dart';
 import 'package:sach_hay/controllers/chapter_controller.dart';
 import 'package:sach_hay/data/storage/user_storage.dart';
-import 'package:sach_hay/view/screens/epub_render_screen.dart';
+
 
 import '../../core/theme/app_colors.dart';
+import 'book_render_screen.dart';
 
 class BookDetailsScreen extends StatefulWidget {
   BookDetailsScreen({Key? key}) : super(key: key);
@@ -459,6 +461,16 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                                           onTap: () {
                                             // Điều hướng đến trang đọc chương
                                             // Get.to(() => EpubRenderScreen());
+                                            final bookId = book.id ?? book.id ?? '';
+                                            final chapterIndexToOpen = index;
+                                            context.push('/reading_chapter?bookId=$bookId&index=$index');
+
+                                            // Get.to(() => ReadingChapterScreen(),
+                                            //   arguments: {
+                                            //     'bookId': bookId,
+                                            //     'index': chapterIndexToOpen,
+                                            //   },
+                                            // );
                                           },
                                         ),
                                       );
