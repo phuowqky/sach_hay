@@ -3,9 +3,12 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sach_hay/data/models/chapter_model/chapter_model.dart';
 import 'package:sach_hay/data/models/chapter_model/list_chapter_model.dart';
+import 'package:sach_hay/data/models/trending_books/trending_book_model.dart';
 import 'dart:typed_data'; 
 import '../../../data/models/book_model/book_model.dart';
 import '../../../data/models/login/login_model.dart';
+import '../../../data/models/new_book_model/new_book_model.dart';
+import '../../../data/models/random_book_model/random_book_model.dart';
 import '../../../data/models/signup/register_model.dart';
 import '../api_response/api_response.dart';
 import '../api_response/api_response_v2.dart';
@@ -29,8 +32,6 @@ abstract class ApiService {
 
   @GET('/api/books/{id}')
   Future<ApiResponseV2<BookModel>> getBookDetails(@Path("id") String id);
-
-
   // 🟢 Thêm API mới để tải file EPUB
   // @GET("/api/books/download/{epubFileName}") // ✅ thêm
   // @DioResponseType(ResponseType.bytes) // ✅ để lấy raw bytes
@@ -46,4 +47,13 @@ abstract class ApiService {
     @Path("bookId") String bookId,
     @Path("index") int index,
   );
+
+  @GET('/api/new-books')
+  Future<ApiResponseV2<List<BookModel>>> getNewBooks();
+
+  @GET('/api/random-books')
+  Future<ApiResponseV2<List<BookModel>>> getRandomBooks();
+
+  @GET('/api/trending-books')
+  Future<ApiResponse<List<TrendingBookModel>>> getTrendingBooks();
 }

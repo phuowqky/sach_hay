@@ -8,11 +8,11 @@ import 'package:go_router/go_router.dart';
 import 'package:path/path.dart';
 import 'package:sach_hay/controllers/home_controller.dart';
 import 'package:sach_hay/view/screens/book_details_screen.dart';
-import 'package:sach_hay/view/screens/epub_render_screen.dart';
 import 'package:sach_hay/view/screens/home_screen.dart';
 import 'package:sach_hay/view/screens/start_screen.dart';
 
 import '../../data/storage/user_storage.dart';
+import '../../view/screens/book_render_screen.dart';
 import '../../view/screens/book_screen.dart';
 import '../../view/screens/login_screen.dart';
 import '../../view/screens/signup_screen.dart';
@@ -72,7 +72,19 @@ class _AppPageState extends State<AppPage> {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const StartScreen();
+          return StartScreen();
+        },
+      ),
+
+      GoRoute(
+        path: '/reading_chapter',
+        builder: (context, state) {
+          final bookId = state.uri.queryParameters['bookId']!;
+          final index = int.parse(state.uri.queryParameters['index']!);
+          return ReadingChapterScreen(
+            bookId: bookId,
+            chapterIndex: index,
+          );
         },
       ),
       // GoRoute(
@@ -115,7 +127,7 @@ class _AppPageState extends State<AppPage> {
       GoRoute(
           path: '/home_screen',
           builder: (context, state) {
-            return const HomeScreen();
+            return  HomeScreen();
           }),
       GoRoute(
           path: '/bookscreen',
