@@ -25,10 +25,10 @@ class ChappterController extends GetxController {
 
   Future<void> getChapters() async {
     isLoading.value = true;
-    // final bookId = await UserStorage.getBookId();
+    final bookId = await UserStorage.getBookId();
 
     try {
-      final response = await apiService.getChapters("68f28ae4ae9e790e0d2a91c1");
+      final response = await apiService.getChapters(bookId);
       if (response.success) {
         log("getChapters successfully ${response.data}");
         // final bookDetail = BookModel.fromJson(response.data!.toJson());

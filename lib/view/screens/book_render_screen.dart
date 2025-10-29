@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sach_hay/controllers/content_book_controller.dart';
 
+import '../../core/theme/app_colors.dart';
+
 class ReadingChapterScreen extends StatefulWidget {
   final String bookId;
   final int chapterIndex;
@@ -70,9 +72,9 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF8E7),
+      backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF8B4513),
+        backgroundColor: AppColors.primary,
         elevation: 0,
         titleSpacing: 0,
         leading: IconButton(
@@ -295,7 +297,7 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
                   icon: const Icon(Icons.chevron_left),
                   label: const Text('Trước'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF8B4513),
+                    backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
@@ -308,7 +310,7 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
                   '${controller.chapterIndex.value + 1}',
                   style: const TextStyle(
                     fontSize: 14,
-                    color: Color(0xFF8B4513),
+                    color: AppColors.primary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -319,7 +321,7 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
                   icon: const Icon(Icons.chevron_right),
                   label: const Text('Sau'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF8B4513),
+                    backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
