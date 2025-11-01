@@ -17,6 +17,7 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:sach_hay/data/models/banner_model/banner_model.dart';
 import 'package:sach_hay/data/models/new_book_model/new_book_model.dart';
 import 'package:sach_hay/data/models/trending_books/trending_book_model.dart';
 
@@ -33,6 +34,7 @@ class HomeController extends GetxController {
   // final RxList<dynamic> newBooks = RxList<dynamic>();
   final newBooks = <BookModel>[].obs;
   final trendingBooks = <TrendingBookModel>[].obs;
+  final banners = <BannerModel>[].obs;
 
   // Method to change tab
   void changeTab(int index) {
@@ -48,6 +50,7 @@ class HomeController extends GetxController {
     getRandomBooks();
     getNewBooks();
     getTrendingBooks();
+    getBanners();
   }
 
   Future<void> getRandomBooks() async {
@@ -110,4 +113,24 @@ class HomeController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  Future<void> getBanners() async {
+    isLoading.value = true;
+    try{
+      final response = await apiService.getBanners();
+      if (response.success) {
+        // Handle successful response
+        log("Banners fetched successfully: ${response.data}");
+        banners.assignAll(response.data ?? []);
+      } else {
+        // Handle failure response
+        log("Failed to fetch banners: ${response.message}");
+      }
+    } catch (e, stack) {
+      log("Error fetching banners: $e, stack: $stack");
+    }finally{
+      isLoading.value = false;
+    }
+  }
+
 }
