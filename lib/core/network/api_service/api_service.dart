@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:sach_hay/data/models/banner_model/banner_model.dart';
 import 'package:sach_hay/data/models/chapter_model/chapter_model.dart';
 import 'package:sach_hay/data/models/chapter_model/list_chapter_model.dart';
 import 'package:sach_hay/data/models/trending_books/trending_book_model.dart';
@@ -56,4 +57,7 @@ abstract class ApiService {
 
   @GET('/api/trending-books')
   Future<ApiResponse<List<TrendingBookModel>>> getTrendingBooks();
+  
+  @GET('/api/banners')
+  Future<ApiResponse<List<BannerModel>>> getBanners();
 }

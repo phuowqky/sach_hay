@@ -72,7 +72,7 @@ class _AppPageState extends State<AppPage> {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return StartScreen();
+          return HomeScreen();
         },
       ),
 
