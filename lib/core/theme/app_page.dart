@@ -9,6 +9,8 @@ import 'package:path/path.dart';
 import 'package:sach_hay/controllers/home_controller.dart';
 import 'package:sach_hay/view/screens/book_details_screen.dart';
 import 'package:sach_hay/view/screens/home_screen.dart';
+import 'package:sach_hay/view/screens/library_book_screen.dart';
+import 'package:sach_hay/view/screens/main_screen.dart';
 import 'package:sach_hay/view/screens/start_screen.dart';
 
 import '../../data/storage/user_storage.dart';
@@ -72,9 +74,11 @@ class _AppPageState extends State<AppPage> {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return HomeScreen();
+          return StartScreen();
         },
       ),
+
+
 
       GoRoute(
         path: '/reading_chapter',
@@ -86,6 +90,13 @@ class _AppPageState extends State<AppPage> {
             chapterIndex: index,
           );
         },
+      ),
+
+      GoRoute(
+          path: '/library-book-screen',
+          builder: (context, state) {
+            return const LibraryBookScreen();
+          }
       ),
       // GoRoute(
       //   path: '/',
@@ -113,6 +124,8 @@ class _AppPageState extends State<AppPage> {
       //     return const HomeScreen();
       //   },
       // ),
+
+
       GoRoute(
           path: '/login_screen',
           builder: (context, state) {
@@ -125,6 +138,10 @@ class _AppPageState extends State<AppPage> {
         },
       ),
       GoRoute(
+        path: '/main_screen',
+        builder: (context, state) => const MainScreen(),
+      ),
+      GoRoute(
           path: '/home_screen',
           builder: (context, state) {
             return  HomeScreen();
@@ -133,7 +150,11 @@ class _AppPageState extends State<AppPage> {
           path: '/bookscreen',
           builder: (context, state) {
             return BookScreen();
-          })
+          }),
+      GoRoute(path: '/book_details_screen', builder: (context, state) {
+        // final bookId = state.uri.queryParameters['bookId']!;
+        return BookDetailsScreen();
+      }),
     ],
   );
 }

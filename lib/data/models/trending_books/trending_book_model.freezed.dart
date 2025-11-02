@@ -41,12 +41,8 @@ mixin _$TrendingBookModel {
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   int? get v => throw _privateConstructorUsedError;
 
-  /// Serializes this TrendingBookModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of TrendingBookModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $TrendingBookModelCopyWith<TrendingBookModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -89,8 +85,6 @@ class _$TrendingBookModelCopyWithImpl<$Res, $Val extends TrendingBookModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of TrendingBookModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -233,8 +227,6 @@ class __$$TrendingBookModelImplCopyWithImpl<$Res>
       $Res Function(_$TrendingBookModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TrendingBookModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -459,7 +451,7 @@ class _$TrendingBookModelImpl implements _TrendingBookModel {
             (identical(other.v, v) || other.v == v));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -484,9 +476,7 @@ class _$TrendingBookModelImpl implements _TrendingBookModel {
         v
       ]);
 
-  /// Create a copy of TrendingBookModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$TrendingBookModelImplCopyWith<_$TrendingBookModelImpl> get copyWith =>
@@ -565,11 +555,8 @@ abstract class _TrendingBookModel implements TrendingBookModel {
   DateTime? get updatedAt;
   @override
   int? get v;
-
-  /// Create a copy of TrendingBookModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$TrendingBookModelImplCopyWith<_$TrendingBookModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

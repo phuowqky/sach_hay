@@ -26,12 +26,8 @@ mixin _$PaginationModel {
   int? get totalPages => throw _privateConstructorUsedError;
   bool? get hasMore => throw _privateConstructorUsedError;
 
-  /// Serializes this PaginationModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PaginationModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PaginationModelCopyWith<PaginationModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,8 +52,6 @@ class _$PaginationModelCopyWithImpl<$Res, $Val extends PaginationModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PaginationModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -112,8 +106,6 @@ class __$$PaginationModelImplCopyWithImpl<$Res>
       _$PaginationModelImpl _value, $Res Function(_$PaginationModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PaginationModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -186,14 +178,12 @@ class _$PaginationModelImpl implements _PaginationModel {
             (identical(other.hasMore, hasMore) || other.hasMore == hasMore));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, page, limit, total, totalPages, hasMore);
 
-  /// Create a copy of PaginationModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PaginationModelImplCopyWith<_$PaginationModelImpl> get copyWith =>
@@ -229,11 +219,8 @@ abstract class _PaginationModel implements PaginationModel {
   int? get totalPages;
   @override
   bool? get hasMore;
-
-  /// Create a copy of PaginationModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PaginationModelImplCopyWith<_$PaginationModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

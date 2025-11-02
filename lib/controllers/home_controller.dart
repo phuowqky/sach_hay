@@ -16,7 +16,9 @@
 // home_controller.dart
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sach_hay/data/models/banner_model/banner_model.dart';
 import 'package:sach_hay/data/models/new_book_model/new_book_model.dart';
 import 'package:sach_hay/data/models/trending_books/trending_book_model.dart';
@@ -37,9 +39,23 @@ class HomeController extends GetxController {
   final banners = <BannerModel>[].obs;
 
   // Method to change tab
-  void changeTab(int index) {
+  void changeTab(int index, BuildContext context) {
     selectedIndex.value = index;
+
+    switch (index) {
+      case 0:
+        context.go('/home_screen');
+        break;
+      case 1:
+        context.go('/library-book-screen');
+        break;
+      case 2:
+        context.go('/profile_screen');
+        break;
+    }
   }
+
+  // Method to change tab
 
   // Getter (optional, for better access)
   int get currentIndex => selectedIndex.value;

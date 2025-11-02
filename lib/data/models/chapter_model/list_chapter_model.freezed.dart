@@ -25,12 +25,8 @@ mixin _$ListChapterModel {
   String get title => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
 
-  /// Serializes this ListChapterModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ListChapterModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ListChapterModelCopyWith<ListChapterModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,8 +50,6 @@ class _$ListChapterModelCopyWithImpl<$Res, $Val extends ListChapterModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ListChapterModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,8 +93,6 @@ class __$$ListChapterModelImplCopyWithImpl<$Res>
       $Res Function(_$ListChapterModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ListChapterModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -159,13 +151,11 @@ class _$ListChapterModelImpl implements _ListChapterModel {
             (identical(other.index, index) || other.index == index));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, index);
 
-  /// Create a copy of ListChapterModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ListChapterModelImplCopyWith<_$ListChapterModelImpl> get copyWith =>
@@ -196,11 +186,8 @@ abstract class _ListChapterModel implements ListChapterModel {
   String get title;
   @override
   int get index;
-
-  /// Create a copy of ListChapterModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ListChapterModelImplCopyWith<_$ListChapterModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

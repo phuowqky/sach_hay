@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'banner_model.dart';
+part of 'bookmark_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,17 +14,18 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-BannerModel _$BannerModelFromJson(Map<String, dynamic> json) {
-  return _BannerModel.fromJson(json);
+BookmarkModel _$BookmarkModelFromJson(Map<String, dynamic> json) {
+  return _BookmarkModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$BannerModel {
+mixin _$BookmarkModel {
   @JsonKey(name: '_id')
   String? get id => throw _privateConstructorUsedError;
-  String? get imageUrl => throw _privateConstructorUsedError;
-  String? get link => throw _privateConstructorUsedError;
-  bool? get isActive => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
+  String? get bookId => throw _privateConstructorUsedError;
+  int? get chapterIndex => throw _privateConstructorUsedError;
+  int? get position => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: '__v')
@@ -32,30 +33,31 @@ mixin _$BannerModel {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $BannerModelCopyWith<BannerModel> get copyWith =>
+  $BookmarkModelCopyWith<BookmarkModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BannerModelCopyWith<$Res> {
-  factory $BannerModelCopyWith(
-          BannerModel value, $Res Function(BannerModel) then) =
-      _$BannerModelCopyWithImpl<$Res, BannerModel>;
+abstract class $BookmarkModelCopyWith<$Res> {
+  factory $BookmarkModelCopyWith(
+          BookmarkModel value, $Res Function(BookmarkModel) then) =
+      _$BookmarkModelCopyWithImpl<$Res, BookmarkModel>;
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String? id,
-      String? imageUrl,
-      String? link,
-      bool? isActive,
+      String? userId,
+      String? bookId,
+      int? chapterIndex,
+      int? position,
       DateTime? createdAt,
       DateTime? updatedAt,
       @JsonKey(name: '__v') int? v});
 }
 
 /// @nodoc
-class _$BannerModelCopyWithImpl<$Res, $Val extends BannerModel>
-    implements $BannerModelCopyWith<$Res> {
-  _$BannerModelCopyWithImpl(this._value, this._then);
+class _$BookmarkModelCopyWithImpl<$Res, $Val extends BookmarkModel>
+    implements $BookmarkModelCopyWith<$Res> {
+  _$BookmarkModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -66,9 +68,10 @@ class _$BannerModelCopyWithImpl<$Res, $Val extends BannerModel>
   @override
   $Res call({
     Object? id = freezed,
-    Object? imageUrl = freezed,
-    Object? link = freezed,
-    Object? isActive = freezed,
+    Object? userId = freezed,
+    Object? bookId = freezed,
+    Object? chapterIndex = freezed,
+    Object? position = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? v = freezed,
@@ -78,18 +81,22 @@ class _$BannerModelCopyWithImpl<$Res, $Val extends BannerModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      link: freezed == link
-          ? _value.link
-          : link // ignore: cast_nullable_to_non_nullable
+      bookId: freezed == bookId
+          ? _value.bookId
+          : bookId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isActive: freezed == isActive
-          ? _value.isActive
-          : isActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      chapterIndex: freezed == chapterIndex
+          ? _value.chapterIndex
+          : chapterIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      position: freezed == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as int?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -107,59 +114,65 @@ class _$BannerModelCopyWithImpl<$Res, $Val extends BannerModel>
 }
 
 /// @nodoc
-abstract class _$$BannerModelImplCopyWith<$Res>
-    implements $BannerModelCopyWith<$Res> {
-  factory _$$BannerModelImplCopyWith(
-          _$BannerModelImpl value, $Res Function(_$BannerModelImpl) then) =
-      __$$BannerModelImplCopyWithImpl<$Res>;
+abstract class _$$BookmarkModelImplCopyWith<$Res>
+    implements $BookmarkModelCopyWith<$Res> {
+  factory _$$BookmarkModelImplCopyWith(
+          _$BookmarkModelImpl value, $Res Function(_$BookmarkModelImpl) then) =
+      __$$BookmarkModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String? id,
-      String? imageUrl,
-      String? link,
-      bool? isActive,
+      String? userId,
+      String? bookId,
+      int? chapterIndex,
+      int? position,
       DateTime? createdAt,
       DateTime? updatedAt,
       @JsonKey(name: '__v') int? v});
 }
 
 /// @nodoc
-class __$$BannerModelImplCopyWithImpl<$Res>
-    extends _$BannerModelCopyWithImpl<$Res, _$BannerModelImpl>
-    implements _$$BannerModelImplCopyWith<$Res> {
-  __$$BannerModelImplCopyWithImpl(
-      _$BannerModelImpl _value, $Res Function(_$BannerModelImpl) _then)
+class __$$BookmarkModelImplCopyWithImpl<$Res>
+    extends _$BookmarkModelCopyWithImpl<$Res, _$BookmarkModelImpl>
+    implements _$$BookmarkModelImplCopyWith<$Res> {
+  __$$BookmarkModelImplCopyWithImpl(
+      _$BookmarkModelImpl _value, $Res Function(_$BookmarkModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
-    Object? imageUrl = freezed,
-    Object? link = freezed,
-    Object? isActive = freezed,
+    Object? userId = freezed,
+    Object? bookId = freezed,
+    Object? chapterIndex = freezed,
+    Object? position = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? v = freezed,
   }) {
-    return _then(_$BannerModelImpl(
+    return _then(_$BookmarkModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      link: freezed == link
-          ? _value.link
-          : link // ignore: cast_nullable_to_non_nullable
+      bookId: freezed == bookId
+          ? _value.bookId
+          : bookId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isActive: freezed == isActive
-          ? _value.isActive
-          : isActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
+      chapterIndex: freezed == chapterIndex
+          ? _value.chapterIndex
+          : chapterIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      position: freezed == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as int?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -178,28 +191,31 @@ class __$$BannerModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BannerModelImpl implements _BannerModel {
-  const _$BannerModelImpl(
+class _$BookmarkModelImpl implements _BookmarkModel {
+  const _$BookmarkModelImpl(
       {@JsonKey(name: '_id') this.id,
-      this.imageUrl,
-      this.link,
-      this.isActive,
+      this.userId,
+      this.bookId,
+      this.chapterIndex,
+      this.position,
       this.createdAt,
       this.updatedAt,
       @JsonKey(name: '__v') this.v});
 
-  factory _$BannerModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BannerModelImplFromJson(json);
+  factory _$BookmarkModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BookmarkModelImplFromJson(json);
 
   @override
   @JsonKey(name: '_id')
   final String? id;
   @override
-  final String? imageUrl;
+  final String? userId;
   @override
-  final String? link;
+  final String? bookId;
   @override
-  final bool? isActive;
+  final int? chapterIndex;
+  @override
+  final int? position;
   @override
   final DateTime? createdAt;
   @override
@@ -210,20 +226,21 @@ class _$BannerModelImpl implements _BannerModel {
 
   @override
   String toString() {
-    return 'BannerModel(id: $id, imageUrl: $imageUrl, link: $link, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt, v: $v)';
+    return 'BookmarkModel(id: $id, userId: $userId, bookId: $bookId, chapterIndex: $chapterIndex, position: $position, createdAt: $createdAt, updatedAt: $updatedAt, v: $v)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BannerModelImpl &&
+            other is _$BookmarkModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl) &&
-            (identical(other.link, link) || other.link == link) &&
-            (identical(other.isActive, isActive) ||
-                other.isActive == isActive) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.bookId, bookId) || other.bookId == bookId) &&
+            (identical(other.chapterIndex, chapterIndex) ||
+                other.chapterIndex == chapterIndex) &&
+            (identical(other.position, position) ||
+                other.position == position) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -233,45 +250,48 @@ class _$BannerModelImpl implements _BannerModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, imageUrl, link, isActive, createdAt, updatedAt, v);
+  int get hashCode => Object.hash(runtimeType, id, userId, bookId, chapterIndex,
+      position, createdAt, updatedAt, v);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$BannerModelImplCopyWith<_$BannerModelImpl> get copyWith =>
-      __$$BannerModelImplCopyWithImpl<_$BannerModelImpl>(this, _$identity);
+  _$$BookmarkModelImplCopyWith<_$BookmarkModelImpl> get copyWith =>
+      __$$BookmarkModelImplCopyWithImpl<_$BookmarkModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BannerModelImplToJson(
+    return _$$BookmarkModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _BannerModel implements BannerModel {
-  const factory _BannerModel(
+abstract class _BookmarkModel implements BookmarkModel {
+  const factory _BookmarkModel(
       {@JsonKey(name: '_id') final String? id,
-      final String? imageUrl,
-      final String? link,
-      final bool? isActive,
+      final String? userId,
+      final String? bookId,
+      final int? chapterIndex,
+      final int? position,
       final DateTime? createdAt,
       final DateTime? updatedAt,
-      @JsonKey(name: '__v') final int? v}) = _$BannerModelImpl;
+      @JsonKey(name: '__v') final int? v}) = _$BookmarkModelImpl;
 
-  factory _BannerModel.fromJson(Map<String, dynamic> json) =
-      _$BannerModelImpl.fromJson;
+  factory _BookmarkModel.fromJson(Map<String, dynamic> json) =
+      _$BookmarkModelImpl.fromJson;
 
   @override
   @JsonKey(name: '_id')
   String? get id;
   @override
-  String? get imageUrl;
+  String? get userId;
   @override
-  String? get link;
+  String? get bookId;
   @override
-  bool? get isActive;
+  int? get chapterIndex;
+  @override
+  int? get position;
   @override
   DateTime? get createdAt;
   @override
@@ -281,6 +301,6 @@ abstract class _BannerModel implements BannerModel {
   int? get v;
   @override
   @JsonKey(ignore: true)
-  _$$BannerModelImplCopyWith<_$BannerModelImpl> get copyWith =>
+  _$$BookmarkModelImplCopyWith<_$BookmarkModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
