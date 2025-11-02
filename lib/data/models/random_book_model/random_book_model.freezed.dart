@@ -27,12 +27,8 @@ mixin _$RandomBookModel {
   String? get description => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
 
-  /// Serializes this RandomBookModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of RandomBookModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $RandomBookModelCopyWith<RandomBookModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,8 +57,6 @@ class _$RandomBookModelCopyWithImpl<$Res, $Val extends RandomBookModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RandomBookModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -121,8 +115,6 @@ class __$$RandomBookModelImplCopyWithImpl<$Res>
       _$RandomBookModelImpl _value, $Res Function(_$RandomBookModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RandomBookModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -201,14 +193,12 @@ class _$RandomBookModelImpl implements _RandomBookModel {
                 other.category == category));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, title, author, description, category);
 
-  /// Create a copy of RandomBookModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RandomBookModelImplCopyWith<_$RandomBookModelImpl> get copyWith =>
@@ -245,11 +235,8 @@ abstract class _RandomBookModel implements RandomBookModel {
   String? get description;
   @override
   String? get category;
-
-  /// Create a copy of RandomBookModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RandomBookModelImplCopyWith<_$RandomBookModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

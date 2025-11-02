@@ -1433,9 +1433,9 @@ class _BookScreenState extends State<BookScreen> {
                           color: Colors.white.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Row(
+                        child: const Row(
                           children: [
-                            const Text(
+                            Text(
                               'Tất cả danh mục',
                               style: TextStyle(
                                 color: Colors.white,
@@ -1443,7 +1443,7 @@ class _BookScreenState extends State<BookScreen> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8),
                             Icon(
                               Icons.keyboard_arrow_down,
                               color: Colors.white,

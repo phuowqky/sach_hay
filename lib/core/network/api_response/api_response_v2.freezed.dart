@@ -31,13 +31,9 @@ mixin _$ApiResponseV2<T> {
   String get error => throw _privateConstructorUsedError;
   PaginationModel? get pagination => throw _privateConstructorUsedError;
 
-  /// Serializes this ApiResponseV2 to a JSON map.
   Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
       throw _privateConstructorUsedError;
-
-  /// Create a copy of ApiResponseV2
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ApiResponseV2CopyWith<T, ApiResponseV2<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -73,8 +69,6 @@ class _$ApiResponseV2CopyWithImpl<T, $Res, $Val extends ApiResponseV2<T>>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ApiResponseV2
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,8 +122,6 @@ class _$ApiResponseV2CopyWithImpl<T, $Res, $Val extends ApiResponseV2<T>>
     ) as $Val);
   }
 
-  /// Create a copy of ApiResponseV2
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $BookInfoModelCopyWith<$Res>? get book {
@@ -142,8 +134,6 @@ class _$ApiResponseV2CopyWithImpl<T, $Res, $Val extends ApiResponseV2<T>>
     });
   }
 
-  /// Create a copy of ApiResponseV2
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginationModelCopyWith<$Res>? get pagination {
@@ -190,8 +180,6 @@ class __$$ApiResponseV2ImplCopyWithImpl<T, $Res>
       $Res Function(_$ApiResponseV2Impl<T>) _then)
       : super(_value, _then);
 
-  /// Create a copy of ApiResponseV2
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -308,7 +296,7 @@ class _$ApiResponseV2Impl<T> implements _ApiResponseV2<T> {
                 other.pagination == pagination));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -322,9 +310,7 @@ class _$ApiResponseV2Impl<T> implements _ApiResponseV2<T> {
       error,
       pagination);
 
-  /// Create a copy of ApiResponseV2
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ApiResponseV2ImplCopyWith<T, _$ApiResponseV2Impl<T>> get copyWith =>
@@ -371,11 +357,8 @@ abstract class _ApiResponseV2<T> implements ApiResponseV2<T> {
   String get error;
   @override
   PaginationModel? get pagination;
-
-  /// Create a copy of ApiResponseV2
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ApiResponseV2ImplCopyWith<T, _$ApiResponseV2Impl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

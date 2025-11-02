@@ -18,6 +18,7 @@ import 'book_render_screen.dart';
 
 class BookDetailsScreen extends StatefulWidget {
   BookDetailsScreen({Key? key}) : super(key: key);
+  static const String bookDetailsScreen = '/book_details_screen';
 
   @override
   State<BookDetailsScreen> createState() => _BookDetailsScreenState();

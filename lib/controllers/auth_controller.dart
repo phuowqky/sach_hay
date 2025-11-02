@@ -90,7 +90,7 @@ class AuthController extends GetxController {
         isSuccess.value = true;
         successText.value = 'Đăng nhập thành công';
         await Future.delayed(const Duration(milliseconds: 800));
-        context.go('/home_screen');
+        context.go('/main_screen');
       } else {
         isSuccess.value = false;
         successText.value = 'Đăng nhập thất bại';

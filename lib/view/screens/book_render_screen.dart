@@ -29,34 +29,6 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
       index: widget.chapterIndex,
     );
   }
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   controller.getChapterContent();
-  // }
-  // @override
-  // void initState() {
-  //   super.initState();
-  //
-  //   // Lấy arguments được gửi từ màn trước
-  //   final args = Get.arguments;
-  //   String? bookId;
-  //   int? index;
-  //
-  //   if (args != null && args is Map) {
-  //     bookId = args['bookId'] as String?;
-  //     index = args['index'] as int?;
-  //   }
-  //
-  //   if (bookId != null && index != null) {
-  //     // gọi controller với bookId và index
-  //     controller.getChapterContent(bookId: bookId, index: index);
-  //   } else {
-  //     // fallback: nếu không có args, bạn có thể gọi hàm mặc định hoặc hiển thị lỗi
-  //     controller.errorMessage.value = 'Không tìm thấy thông tin chương để mở';
-  //   }
-  // }
-
   @override
   void dispose() {
     _scrollController.dispose();

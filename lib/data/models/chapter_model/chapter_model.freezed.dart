@@ -26,12 +26,8 @@ mixin _$ChapterModel {
   String? get chapterTitle => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
 
-  /// Serializes this ChapterModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ChapterModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ChapterModelCopyWith<ChapterModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,8 +56,6 @@ class _$ChapterModelCopyWithImpl<$Res, $Val extends ChapterModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ChapterModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -120,8 +114,6 @@ class __$$ChapterModelImplCopyWithImpl<$Res>
       _$ChapterModelImpl _value, $Res Function(_$ChapterModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ChapterModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -201,14 +193,12 @@ class _$ChapterModelImpl implements _ChapterModel {
             (identical(other.content, content) || other.content == content));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, success, bookTitle, chapterIndex, chapterTitle, content);
 
-  /// Create a copy of ChapterModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ChapterModelImplCopyWith<_$ChapterModelImpl> get copyWith =>
@@ -243,11 +233,8 @@ abstract class _ChapterModel implements ChapterModel {
   String? get chapterTitle;
   @override
   String? get content;
-
-  /// Create a copy of ChapterModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ChapterModelImplCopyWith<_$ChapterModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

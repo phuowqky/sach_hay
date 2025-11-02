@@ -40,12 +40,8 @@ mixin _$BookModel {
   @JsonKey(name: '__v')
   int? get v => throw _privateConstructorUsedError;
 
-  /// Serializes this BookModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of BookModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $BookModelCopyWith<BookModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -85,8 +81,6 @@ class _$BookModelCopyWithImpl<$Res, $Val extends BookModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of BookModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -217,8 +211,6 @@ class __$$BookModelImplCopyWithImpl<$Res>
       _$BookModelImpl _value, $Res Function(_$BookModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of BookModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -424,7 +416,7 @@ class _$BookModelImpl implements _BookModel {
             (identical(other.v, v) || other.v == v));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -446,9 +438,7 @@ class _$BookModelImpl implements _BookModel {
       updatedAt,
       v);
 
-  /// Create a copy of BookModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$BookModelImplCopyWith<_$BookModelImpl> get copyWith =>
@@ -521,11 +511,8 @@ abstract class _BookModel implements BookModel {
   @override
   @JsonKey(name: '__v')
   int? get v;
-
-  /// Create a copy of BookModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$BookModelImplCopyWith<_$BookModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
