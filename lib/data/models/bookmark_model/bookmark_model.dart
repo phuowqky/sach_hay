@@ -8,7 +8,8 @@ class BookmarkModel with _$BookmarkModel {
   const factory BookmarkModel({
     @JsonKey(name: '_id') String? id,
     String? userId,
-    String? bookId,
+    BookInfo? bookId,
+    String? progress,
     int? chapterIndex,
     int? position,
     DateTime? createdAt,
@@ -18,4 +19,17 @@ class BookmarkModel with _$BookmarkModel {
 
   factory BookmarkModel.fromJson(Map<String, dynamic> json) =>
       _$BookmarkModelFromJson(json);
+}
+
+@freezed
+class BookInfo with _$BookInfo {
+  const factory BookInfo({
+    @JsonKey(name: '_id') String? id,
+    String? title,
+    String? coverImage,
+    String? author,
+  }) = _BookInfo;
+
+  factory BookInfo.fromJson(Map<String, dynamic> json) =>
+      _$BookInfoFromJson(json);
 }
