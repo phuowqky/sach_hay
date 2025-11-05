@@ -2,6 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sach_hay/data/models/banner_model/banner_model.dart';
+import 'package:sach_hay/data/models/bookmark_model/bookmark_model.dart';
 import 'package:sach_hay/data/models/chapter_model/chapter_model.dart';
 import 'package:sach_hay/data/models/chapter_model/list_chapter_model.dart';
 import 'package:sach_hay/data/models/trending_books/trending_book_model.dart';
@@ -60,4 +61,17 @@ abstract class ApiService {
   
   @GET('/api/banners')
   Future<ApiResponse<List<BannerModel>>> getBanners();
+
+  @GET('api/bookmarks/{userId}')
+  Future<ApiResponse<List<BookmarkModel>>> getListBookmarks(
+    @Path("userId") String userId,
+  );
+
+  @GET('api/bookmarks/{userId}/{bookId}')
+  Future<ApiResponse<BookmarkModel>> getBookmark(
+    @Path("userId") String userId,
+    @Path("bookId") String bookId,
+  );
+  
+
 }

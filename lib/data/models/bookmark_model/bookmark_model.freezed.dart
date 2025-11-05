@@ -23,7 +23,8 @@ mixin _$BookmarkModel {
   @JsonKey(name: '_id')
   String? get id => throw _privateConstructorUsedError;
   String? get userId => throw _privateConstructorUsedError;
-  String? get bookId => throw _privateConstructorUsedError;
+  BookInfo? get bookId => throw _privateConstructorUsedError;
+  String? get progress => throw _privateConstructorUsedError;
   int? get chapterIndex => throw _privateConstructorUsedError;
   int? get position => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -46,12 +47,15 @@ abstract class $BookmarkModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: '_id') String? id,
       String? userId,
-      String? bookId,
+      BookInfo? bookId,
+      String? progress,
       int? chapterIndex,
       int? position,
       DateTime? createdAt,
       DateTime? updatedAt,
       @JsonKey(name: '__v') int? v});
+
+  $BookInfoCopyWith<$Res>? get bookId;
 }
 
 /// @nodoc
@@ -70,6 +74,7 @@ class _$BookmarkModelCopyWithImpl<$Res, $Val extends BookmarkModel>
     Object? id = freezed,
     Object? userId = freezed,
     Object? bookId = freezed,
+    Object? progress = freezed,
     Object? chapterIndex = freezed,
     Object? position = freezed,
     Object? createdAt = freezed,
@@ -88,6 +93,10 @@ class _$BookmarkModelCopyWithImpl<$Res, $Val extends BookmarkModel>
       bookId: freezed == bookId
           ? _value.bookId
           : bookId // ignore: cast_nullable_to_non_nullable
+              as BookInfo?,
+      progress: freezed == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
               as String?,
       chapterIndex: freezed == chapterIndex
           ? _value.chapterIndex
@@ -111,6 +120,18 @@ class _$BookmarkModelCopyWithImpl<$Res, $Val extends BookmarkModel>
               as int?,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BookInfoCopyWith<$Res>? get bookId {
+    if (_value.bookId == null) {
+      return null;
+    }
+
+    return $BookInfoCopyWith<$Res>(_value.bookId!, (value) {
+      return _then(_value.copyWith(bookId: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -124,12 +145,16 @@ abstract class _$$BookmarkModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: '_id') String? id,
       String? userId,
-      String? bookId,
+      BookInfo? bookId,
+      String? progress,
       int? chapterIndex,
       int? position,
       DateTime? createdAt,
       DateTime? updatedAt,
       @JsonKey(name: '__v') int? v});
+
+  @override
+  $BookInfoCopyWith<$Res>? get bookId;
 }
 
 /// @nodoc
@@ -146,6 +171,7 @@ class __$$BookmarkModelImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? userId = freezed,
     Object? bookId = freezed,
+    Object? progress = freezed,
     Object? chapterIndex = freezed,
     Object? position = freezed,
     Object? createdAt = freezed,
@@ -164,6 +190,10 @@ class __$$BookmarkModelImplCopyWithImpl<$Res>
       bookId: freezed == bookId
           ? _value.bookId
           : bookId // ignore: cast_nullable_to_non_nullable
+              as BookInfo?,
+      progress: freezed == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
               as String?,
       chapterIndex: freezed == chapterIndex
           ? _value.chapterIndex
@@ -196,6 +226,7 @@ class _$BookmarkModelImpl implements _BookmarkModel {
       {@JsonKey(name: '_id') this.id,
       this.userId,
       this.bookId,
+      this.progress,
       this.chapterIndex,
       this.position,
       this.createdAt,
@@ -211,7 +242,9 @@ class _$BookmarkModelImpl implements _BookmarkModel {
   @override
   final String? userId;
   @override
-  final String? bookId;
+  final BookInfo? bookId;
+  @override
+  final String? progress;
   @override
   final int? chapterIndex;
   @override
@@ -226,7 +259,7 @@ class _$BookmarkModelImpl implements _BookmarkModel {
 
   @override
   String toString() {
-    return 'BookmarkModel(id: $id, userId: $userId, bookId: $bookId, chapterIndex: $chapterIndex, position: $position, createdAt: $createdAt, updatedAt: $updatedAt, v: $v)';
+    return 'BookmarkModel(id: $id, userId: $userId, bookId: $bookId, progress: $progress, chapterIndex: $chapterIndex, position: $position, createdAt: $createdAt, updatedAt: $updatedAt, v: $v)';
   }
 
   @override
@@ -237,6 +270,8 @@ class _$BookmarkModelImpl implements _BookmarkModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.bookId, bookId) || other.bookId == bookId) &&
+            (identical(other.progress, progress) ||
+                other.progress == progress) &&
             (identical(other.chapterIndex, chapterIndex) ||
                 other.chapterIndex == chapterIndex) &&
             (identical(other.position, position) ||
@@ -250,8 +285,8 @@ class _$BookmarkModelImpl implements _BookmarkModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, bookId, chapterIndex,
-      position, createdAt, updatedAt, v);
+  int get hashCode => Object.hash(runtimeType, id, userId, bookId, progress,
+      chapterIndex, position, createdAt, updatedAt, v);
 
   @JsonKey(ignore: true)
   @override
@@ -271,7 +306,8 @@ abstract class _BookmarkModel implements BookmarkModel {
   const factory _BookmarkModel(
       {@JsonKey(name: '_id') final String? id,
       final String? userId,
-      final String? bookId,
+      final BookInfo? bookId,
+      final String? progress,
       final int? chapterIndex,
       final int? position,
       final DateTime? createdAt,
@@ -287,7 +323,9 @@ abstract class _BookmarkModel implements BookmarkModel {
   @override
   String? get userId;
   @override
-  String? get bookId;
+  BookInfo? get bookId;
+  @override
+  String? get progress;
   @override
   int? get chapterIndex;
   @override
@@ -302,5 +340,208 @@ abstract class _BookmarkModel implements BookmarkModel {
   @override
   @JsonKey(ignore: true)
   _$$BookmarkModelImplCopyWith<_$BookmarkModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+BookInfo _$BookInfoFromJson(Map<String, dynamic> json) {
+  return _BookInfo.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BookInfo {
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  String? get coverImage => throw _privateConstructorUsedError;
+  String? get author => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BookInfoCopyWith<BookInfo> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BookInfoCopyWith<$Res> {
+  factory $BookInfoCopyWith(BookInfo value, $Res Function(BookInfo) then) =
+      _$BookInfoCopyWithImpl<$Res, BookInfo>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String? title,
+      String? coverImage,
+      String? author});
+}
+
+/// @nodoc
+class _$BookInfoCopyWithImpl<$Res, $Val extends BookInfo>
+    implements $BookInfoCopyWith<$Res> {
+  _$BookInfoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? title = freezed,
+    Object? coverImage = freezed,
+    Object? author = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverImage: freezed == coverImage
+          ? _value.coverImage
+          : coverImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      author: freezed == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BookInfoImplCopyWith<$Res>
+    implements $BookInfoCopyWith<$Res> {
+  factory _$$BookInfoImplCopyWith(
+          _$BookInfoImpl value, $Res Function(_$BookInfoImpl) then) =
+      __$$BookInfoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String? title,
+      String? coverImage,
+      String? author});
+}
+
+/// @nodoc
+class __$$BookInfoImplCopyWithImpl<$Res>
+    extends _$BookInfoCopyWithImpl<$Res, _$BookInfoImpl>
+    implements _$$BookInfoImplCopyWith<$Res> {
+  __$$BookInfoImplCopyWithImpl(
+      _$BookInfoImpl _value, $Res Function(_$BookInfoImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? title = freezed,
+    Object? coverImage = freezed,
+    Object? author = freezed,
+  }) {
+    return _then(_$BookInfoImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      coverImage: freezed == coverImage
+          ? _value.coverImage
+          : coverImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      author: freezed == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BookInfoImpl implements _BookInfo {
+  const _$BookInfoImpl(
+      {@JsonKey(name: '_id') this.id,
+      this.title,
+      this.coverImage,
+      this.author});
+
+  factory _$BookInfoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BookInfoImplFromJson(json);
+
+  @override
+  @JsonKey(name: '_id')
+  final String? id;
+  @override
+  final String? title;
+  @override
+  final String? coverImage;
+  @override
+  final String? author;
+
+  @override
+  String toString() {
+    return 'BookInfo(id: $id, title: $title, coverImage: $coverImage, author: $author)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BookInfoImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.coverImage, coverImage) ||
+                other.coverImage == coverImage) &&
+            (identical(other.author, author) || other.author == author));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, title, coverImage, author);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BookInfoImplCopyWith<_$BookInfoImpl> get copyWith =>
+      __$$BookInfoImplCopyWithImpl<_$BookInfoImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BookInfoImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BookInfo implements BookInfo {
+  const factory _BookInfo(
+      {@JsonKey(name: '_id') final String? id,
+      final String? title,
+      final String? coverImage,
+      final String? author}) = _$BookInfoImpl;
+
+  factory _BookInfo.fromJson(Map<String, dynamic> json) =
+      _$BookInfoImpl.fromJson;
+
+  @override
+  @JsonKey(name: '_id')
+  String? get id;
+  @override
+  String? get title;
+  @override
+  String? get coverImage;
+  @override
+  String? get author;
+  @override
+  @JsonKey(ignore: true)
+  _$$BookInfoImplCopyWith<_$BookInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
