@@ -10,10 +10,7 @@ _$BookmarkModelImpl _$$BookmarkModelImplFromJson(Map<String, dynamic> json) =>
     _$BookmarkModelImpl(
       id: json['_id'] as String?,
       userId: json['userId'] as String?,
-      bookId: json['bookId'] == null
-          ? null
-          : BookInfo.fromJson(json['bookId'] as Map<String, dynamic>),
-      progress: json['progress'] as String?,
+      bookId: json['bookId'] as String?,
       chapterIndex: (json['chapterIndex'] as num?)?.toInt(),
       position: (json['position'] as num?)?.toInt(),
       createdAt: json['createdAt'] == null
@@ -30,26 +27,9 @@ Map<String, dynamic> _$$BookmarkModelImplToJson(_$BookmarkModelImpl instance) =>
       '_id': instance.id,
       'userId': instance.userId,
       'bookId': instance.bookId,
-      'progress': instance.progress,
       'chapterIndex': instance.chapterIndex,
       'position': instance.position,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       '__v': instance.v,
-    };
-
-_$BookInfoImpl _$$BookInfoImplFromJson(Map<String, dynamic> json) =>
-    _$BookInfoImpl(
-      id: json['_id'] as String?,
-      title: json['title'] as String?,
-      coverImage: json['coverImage'] as String?,
-      author: json['author'] as String?,
-    );
-
-Map<String, dynamic> _$$BookInfoImplToJson(_$BookInfoImpl instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'title': instance.title,
-      'coverImage': instance.coverImage,
-      'author': instance.author,
     };

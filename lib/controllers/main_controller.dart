@@ -9,7 +9,7 @@ class MainController extends GetxController {
 
   final List<Widget> screens = [
     HomeScreen(),
-     LibraryBookScreen(),
+    const LibraryBookScreen(),
     // ProfileScreen(),
   ];
 

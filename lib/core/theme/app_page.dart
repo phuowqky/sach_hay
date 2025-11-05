@@ -95,7 +95,7 @@ class _AppPageState extends State<AppPage> {
       GoRoute(
           path: '/library-book-screen',
           builder: (context, state) {
-            return LibraryBookScreen();
+            return const LibraryBookScreen();
           }
       ),
       // GoRoute(
