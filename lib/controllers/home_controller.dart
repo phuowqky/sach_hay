@@ -50,6 +50,9 @@ class HomeController extends GetxController {
         context.go('/library-book-screen');
         break;
       case 2:
+        context.go('/advise_screen');
+        break;
+      case 3:
         context.go('/profile_screen');
         break;
     }

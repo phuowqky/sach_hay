@@ -12,39 +12,44 @@ class MainScreen extends StatelessWidget {
     final controller = Get.put(MainController());
 
     return Obx(() => Scaffold(
-      backgroundColor: Colors.white,
-      body: IndexedStack(
-        index: controller.selectedIndex.value,
-        children: controller.screens,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: AppColors.white,
-        currentIndex: controller.selectedIndex.value,
-        onTap: controller.changeTab,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: Colors.grey[600],
-        selectedFontSize: 12,
-        unselectedFontSize: 12,
-        elevation: 8,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Trang chủ',
+          backgroundColor: Colors.white,
+          body: IndexedStack(
+            index: controller.selectedIndex.value,
+            children: controller.screens,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.library_books_outlined),
-            activeIcon: Icon(Icons.library_books),
-            label: 'Thư viện',
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: AppColors.white,
+            currentIndex: controller.selectedIndex.value,
+            onTap: controller.changeTab,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: AppColors.primary,
+            unselectedItemColor: Colors.grey[600],
+            selectedFontSize: 12,
+            unselectedFontSize: 12,
+            elevation: 8,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_outlined),
+                activeIcon: Icon(Icons.home),
+                label: 'Trang chủ',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.library_books_outlined),
+                activeIcon: Icon(Icons.library_books),
+                label: 'Thư viện',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.chat_outlined),
+                activeIcon: Icon(Icons.library_books),
+                label: 'Tư vấn',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline),
+                activeIcon: Icon(Icons.person),
+                label: 'Hồ sơ',
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            activeIcon: Icon(Icons.person),
-            label: 'Hồ sơ',
-          ),
-        ],
-      ),
-    ));
+        ));
   }
 }
