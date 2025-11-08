@@ -11,6 +11,7 @@ class BookmarkModel with _$BookmarkModel {
     String? userId,
     BookInfo? bookId,
     String? progress,
+    bool? isCompleted,
     int? chapterIndex,
     int? position,
     DateTime? createdAt,

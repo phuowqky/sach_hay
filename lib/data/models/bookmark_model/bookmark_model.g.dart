@@ -14,6 +14,7 @@ _$BookmarkModelImpl _$$BookmarkModelImplFromJson(Map<String, dynamic> json) =>
           ? null
           : BookInfo.fromJson(json['bookId'] as Map<String, dynamic>),
       progress: json['progress'] as String?,
+      isCompleted: json['isCompleted'] as bool?,
       chapterIndex: (json['chapterIndex'] as num?)?.toInt(),
       position: (json['position'] as num?)?.toInt(),
       createdAt: json['createdAt'] == null
@@ -34,6 +35,7 @@ Map<String, dynamic> _$$BookmarkModelImplToJson(_$BookmarkModelImpl instance) =>
       'userId': instance.userId,
       'bookId': instance.bookId,
       'progress': instance.progress,
+      'isCompleted': instance.isCompleted,
       'chapterIndex': instance.chapterIndex,
       'position': instance.position,
       'createdAt': instance.createdAt?.toIso8601String(),

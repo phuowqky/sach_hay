@@ -25,6 +25,7 @@ mixin _$BookmarkModel {
   String? get userId => throw _privateConstructorUsedError;
   BookInfo? get bookId => throw _privateConstructorUsedError;
   String? get progress => throw _privateConstructorUsedError;
+  bool? get isCompleted => throw _privateConstructorUsedError;
   int? get chapterIndex => throw _privateConstructorUsedError;
   int? get position => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -50,6 +51,7 @@ abstract class $BookmarkModelCopyWith<$Res> {
       String? userId,
       BookInfo? bookId,
       String? progress,
+      bool? isCompleted,
       int? chapterIndex,
       int? position,
       DateTime? createdAt,
@@ -78,6 +80,7 @@ class _$BookmarkModelCopyWithImpl<$Res, $Val extends BookmarkModel>
     Object? userId = freezed,
     Object? bookId = freezed,
     Object? progress = freezed,
+    Object? isCompleted = freezed,
     Object? chapterIndex = freezed,
     Object? position = freezed,
     Object? createdAt = freezed,
@@ -102,6 +105,10 @@ class _$BookmarkModelCopyWithImpl<$Res, $Val extends BookmarkModel>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as String?,
+      isCompleted: freezed == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
       chapterIndex: freezed == chapterIndex
           ? _value.chapterIndex
           : chapterIndex // ignore: cast_nullable_to_non_nullable
@@ -167,6 +174,7 @@ abstract class _$$BookmarkModelImplCopyWith<$Res>
       String? userId,
       BookInfo? bookId,
       String? progress,
+      bool? isCompleted,
       int? chapterIndex,
       int? position,
       DateTime? createdAt,
@@ -195,6 +203,7 @@ class __$$BookmarkModelImplCopyWithImpl<$Res>
     Object? userId = freezed,
     Object? bookId = freezed,
     Object? progress = freezed,
+    Object? isCompleted = freezed,
     Object? chapterIndex = freezed,
     Object? position = freezed,
     Object? createdAt = freezed,
@@ -219,6 +228,10 @@ class __$$BookmarkModelImplCopyWithImpl<$Res>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as String?,
+      isCompleted: freezed == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
       chapterIndex: freezed == chapterIndex
           ? _value.chapterIndex
           : chapterIndex // ignore: cast_nullable_to_non_nullable
@@ -255,6 +268,7 @@ class _$BookmarkModelImpl implements _BookmarkModel {
       this.userId,
       this.bookId,
       this.progress,
+      this.isCompleted,
       this.chapterIndex,
       this.position,
       this.createdAt,
@@ -275,6 +289,8 @@ class _$BookmarkModelImpl implements _BookmarkModel {
   @override
   final String? progress;
   @override
+  final bool? isCompleted;
+  @override
   final int? chapterIndex;
   @override
   final int? position;
@@ -290,7 +306,7 @@ class _$BookmarkModelImpl implements _BookmarkModel {
 
   @override
   String toString() {
-    return 'BookmarkModel(id: $id, userId: $userId, bookId: $bookId, progress: $progress, chapterIndex: $chapterIndex, position: $position, createdAt: $createdAt, updatedAt: $updatedAt, book: $book, v: $v)';
+    return 'BookmarkModel(id: $id, userId: $userId, bookId: $bookId, progress: $progress, isCompleted: $isCompleted, chapterIndex: $chapterIndex, position: $position, createdAt: $createdAt, updatedAt: $updatedAt, book: $book, v: $v)';
   }
 
   @override
@@ -303,6 +319,8 @@ class _$BookmarkModelImpl implements _BookmarkModel {
             (identical(other.bookId, bookId) || other.bookId == bookId) &&
             (identical(other.progress, progress) ||
                 other.progress == progress) &&
+            (identical(other.isCompleted, isCompleted) ||
+                other.isCompleted == isCompleted) &&
             (identical(other.chapterIndex, chapterIndex) ||
                 other.chapterIndex == chapterIndex) &&
             (identical(other.position, position) ||
@@ -318,7 +336,7 @@ class _$BookmarkModelImpl implements _BookmarkModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, userId, bookId, progress,
-      chapterIndex, position, createdAt, updatedAt, book, v);
+      isCompleted, chapterIndex, position, createdAt, updatedAt, book, v);
 
   @JsonKey(ignore: true)
   @override
@@ -340,6 +358,7 @@ abstract class _BookmarkModel implements BookmarkModel {
       final String? userId,
       final BookInfo? bookId,
       final String? progress,
+      final bool? isCompleted,
       final int? chapterIndex,
       final int? position,
       final DateTime? createdAt,
@@ -359,6 +378,8 @@ abstract class _BookmarkModel implements BookmarkModel {
   BookInfo? get bookId;
   @override
   String? get progress;
+  @override
+  bool? get isCompleted;
   @override
   int? get chapterIndex;
   @override
