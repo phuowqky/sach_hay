@@ -25,10 +25,12 @@ mixin _$BookmarkModel {
   String? get userId => throw _privateConstructorUsedError;
   BookInfo? get bookId => throw _privateConstructorUsedError;
   String? get progress => throw _privateConstructorUsedError;
+  bool? get isCompleted => throw _privateConstructorUsedError;
   int? get chapterIndex => throw _privateConstructorUsedError;
   int? get position => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  BookModel? get book => throw _privateConstructorUsedError;
   @JsonKey(name: '__v')
   int? get v => throw _privateConstructorUsedError;
 
@@ -49,13 +51,16 @@ abstract class $BookmarkModelCopyWith<$Res> {
       String? userId,
       BookInfo? bookId,
       String? progress,
+      bool? isCompleted,
       int? chapterIndex,
       int? position,
       DateTime? createdAt,
       DateTime? updatedAt,
+      BookModel? book,
       @JsonKey(name: '__v') int? v});
 
   $BookInfoCopyWith<$Res>? get bookId;
+  $BookModelCopyWith<$Res>? get book;
 }
 
 /// @nodoc
@@ -75,10 +80,12 @@ class _$BookmarkModelCopyWithImpl<$Res, $Val extends BookmarkModel>
     Object? userId = freezed,
     Object? bookId = freezed,
     Object? progress = freezed,
+    Object? isCompleted = freezed,
     Object? chapterIndex = freezed,
     Object? position = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? book = freezed,
     Object? v = freezed,
   }) {
     return _then(_value.copyWith(
@@ -98,6 +105,10 @@ class _$BookmarkModelCopyWithImpl<$Res, $Val extends BookmarkModel>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as String?,
+      isCompleted: freezed == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
       chapterIndex: freezed == chapterIndex
           ? _value.chapterIndex
           : chapterIndex // ignore: cast_nullable_to_non_nullable
@@ -114,6 +125,10 @@ class _$BookmarkModelCopyWithImpl<$Res, $Val extends BookmarkModel>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      book: freezed == book
+          ? _value.book
+          : book // ignore: cast_nullable_to_non_nullable
+              as BookModel?,
       v: freezed == v
           ? _value.v
           : v // ignore: cast_nullable_to_non_nullable
@@ -132,6 +147,18 @@ class _$BookmarkModelCopyWithImpl<$Res, $Val extends BookmarkModel>
       return _then(_value.copyWith(bookId: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BookModelCopyWith<$Res>? get book {
+    if (_value.book == null) {
+      return null;
+    }
+
+    return $BookModelCopyWith<$Res>(_value.book!, (value) {
+      return _then(_value.copyWith(book: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -147,14 +174,18 @@ abstract class _$$BookmarkModelImplCopyWith<$Res>
       String? userId,
       BookInfo? bookId,
       String? progress,
+      bool? isCompleted,
       int? chapterIndex,
       int? position,
       DateTime? createdAt,
       DateTime? updatedAt,
+      BookModel? book,
       @JsonKey(name: '__v') int? v});
 
   @override
   $BookInfoCopyWith<$Res>? get bookId;
+  @override
+  $BookModelCopyWith<$Res>? get book;
 }
 
 /// @nodoc
@@ -172,10 +203,12 @@ class __$$BookmarkModelImplCopyWithImpl<$Res>
     Object? userId = freezed,
     Object? bookId = freezed,
     Object? progress = freezed,
+    Object? isCompleted = freezed,
     Object? chapterIndex = freezed,
     Object? position = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? book = freezed,
     Object? v = freezed,
   }) {
     return _then(_$BookmarkModelImpl(
@@ -195,6 +228,10 @@ class __$$BookmarkModelImplCopyWithImpl<$Res>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as String?,
+      isCompleted: freezed == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
       chapterIndex: freezed == chapterIndex
           ? _value.chapterIndex
           : chapterIndex // ignore: cast_nullable_to_non_nullable
@@ -211,6 +248,10 @@ class __$$BookmarkModelImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      book: freezed == book
+          ? _value.book
+          : book // ignore: cast_nullable_to_non_nullable
+              as BookModel?,
       v: freezed == v
           ? _value.v
           : v // ignore: cast_nullable_to_non_nullable
@@ -227,10 +268,12 @@ class _$BookmarkModelImpl implements _BookmarkModel {
       this.userId,
       this.bookId,
       this.progress,
+      this.isCompleted,
       this.chapterIndex,
       this.position,
       this.createdAt,
       this.updatedAt,
+      this.book,
       @JsonKey(name: '__v') this.v});
 
   factory _$BookmarkModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -246,6 +289,8 @@ class _$BookmarkModelImpl implements _BookmarkModel {
   @override
   final String? progress;
   @override
+  final bool? isCompleted;
+  @override
   final int? chapterIndex;
   @override
   final int? position;
@@ -254,12 +299,14 @@ class _$BookmarkModelImpl implements _BookmarkModel {
   @override
   final DateTime? updatedAt;
   @override
+  final BookModel? book;
+  @override
   @JsonKey(name: '__v')
   final int? v;
 
   @override
   String toString() {
-    return 'BookmarkModel(id: $id, userId: $userId, bookId: $bookId, progress: $progress, chapterIndex: $chapterIndex, position: $position, createdAt: $createdAt, updatedAt: $updatedAt, v: $v)';
+    return 'BookmarkModel(id: $id, userId: $userId, bookId: $bookId, progress: $progress, isCompleted: $isCompleted, chapterIndex: $chapterIndex, position: $position, createdAt: $createdAt, updatedAt: $updatedAt, book: $book, v: $v)';
   }
 
   @override
@@ -272,6 +319,8 @@ class _$BookmarkModelImpl implements _BookmarkModel {
             (identical(other.bookId, bookId) || other.bookId == bookId) &&
             (identical(other.progress, progress) ||
                 other.progress == progress) &&
+            (identical(other.isCompleted, isCompleted) ||
+                other.isCompleted == isCompleted) &&
             (identical(other.chapterIndex, chapterIndex) ||
                 other.chapterIndex == chapterIndex) &&
             (identical(other.position, position) ||
@@ -280,13 +329,14 @@ class _$BookmarkModelImpl implements _BookmarkModel {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
+            (identical(other.book, book) || other.book == book) &&
             (identical(other.v, v) || other.v == v));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, userId, bookId, progress,
-      chapterIndex, position, createdAt, updatedAt, v);
+      isCompleted, chapterIndex, position, createdAt, updatedAt, book, v);
 
   @JsonKey(ignore: true)
   @override
@@ -308,10 +358,12 @@ abstract class _BookmarkModel implements BookmarkModel {
       final String? userId,
       final BookInfo? bookId,
       final String? progress,
+      final bool? isCompleted,
       final int? chapterIndex,
       final int? position,
       final DateTime? createdAt,
       final DateTime? updatedAt,
+      final BookModel? book,
       @JsonKey(name: '__v') final int? v}) = _$BookmarkModelImpl;
 
   factory _BookmarkModel.fromJson(Map<String, dynamic> json) =
@@ -327,6 +379,8 @@ abstract class _BookmarkModel implements BookmarkModel {
   @override
   String? get progress;
   @override
+  bool? get isCompleted;
+  @override
   int? get chapterIndex;
   @override
   int? get position;
@@ -334,6 +388,8 @@ abstract class _BookmarkModel implements BookmarkModel {
   DateTime? get createdAt;
   @override
   DateTime? get updatedAt;
+  @override
+  BookModel? get book;
   @override
   @JsonKey(name: '__v')
   int? get v;

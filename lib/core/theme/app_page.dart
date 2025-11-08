@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:path/path.dart';
 import 'package:sach_hay/controllers/home_controller.dart';
+import 'package:sach_hay/view/screens/advise_screen.dart';
 import 'package:sach_hay/view/screens/book_details_screen.dart';
 import 'package:sach_hay/view/screens/home_screen.dart';
 import 'package:sach_hay/view/screens/library_book_screen.dart';
@@ -71,14 +72,23 @@ class _AppPageState extends State<AppPage> {
   final GoRouter _router = GoRouter(
     navigatorKey: navigatorKey,
     routes: <RouteBase>[
+      // GoRoute(
+      //   path: '/',
+      //   builder: (BuildContext context, GoRouterState state) {
+      //     return StartScreen();
+      //   },
+      // ),
+
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return StartScreen();
+          return MainScreen();
         },
       ),
-
-
+      
+      GoRoute(path: '/advise_screen', builder: (context, state) {
+        return AdviseScreen();
+      }),
 
       GoRoute(
         path: '/reading_chapter',
