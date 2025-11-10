@@ -5,7 +5,7 @@
 // }
 import 'package:flutter/material.dart';
 import 'core/di/common_features.dart';
-import 'core/theme/app_page.dart';
+import 'router/app_page.dart';
 import 'core/theme/app_theme.dart';
 
 void main() async {

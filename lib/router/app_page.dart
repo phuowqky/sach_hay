@@ -12,14 +12,15 @@ import 'package:sach_hay/view/screens/book_details_screen.dart';
 import 'package:sach_hay/view/screens/home_screen.dart';
 import 'package:sach_hay/view/screens/library_book_screen.dart';
 import 'package:sach_hay/view/screens/main_screen.dart';
+import 'package:sach_hay/view/screens/ranking_screen.dart';
 import 'package:sach_hay/view/screens/start_screen.dart';
 
-import '../../data/storage/user_storage.dart';
-import '../../view/screens/book_render_screen.dart';
-import '../../view/screens/book_screen.dart';
-import '../../view/screens/login_screen.dart';
-import '../../view/screens/signup_screen.dart';
-import '../di/common_features.dart';
+import '../data/storage/user_storage.dart';
+import '../view/screens/book_render_screen.dart';
+import '../view/screens/book_screen.dart';
+import '../view/screens/login_screen.dart';
+import '../view/screens/signup_screen.dart';
+import '../core/di/common_features.dart';
 
 class AppPage extends StatefulWidget {
   const AppPage({super.key});
@@ -137,6 +138,12 @@ class _AppPageState extends State<AppPage> {
 
 
       GoRoute(
+        path: '/ranking_screen',
+        builder: (context, state) {
+        return RankingScreen();
+      }),
+
+      GoRoute(
           path: '/login_screen',
           builder: (context, state) {
             return LoginScreen();
@@ -164,6 +171,9 @@ class _AppPageState extends State<AppPage> {
       GoRoute(path: '/book_details_screen', builder: (context, state) {
         // final bookId = state.uri.queryParameters['bookId']!;
         return BookDetailsScreen();
+
+      //  GoRoute(path: '/ranking_screen', builder: (context, state) {
+      //   return RankingScreen();
       }),
     ],
   );

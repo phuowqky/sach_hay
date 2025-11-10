@@ -39,9 +39,9 @@ class MainScreen extends StatelessWidget {
                 label: 'Thư viện',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.chat_outlined),
-                activeIcon: Icon(Icons.library_books),
-                label: 'Tư vấn',
+                icon: Icon(Icons.leaderboard_outlined),
+                activeIcon: Icon(Icons.leaderboard),
+                label: 'Xếp hạng',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline),

@@ -39,7 +39,10 @@ class AdviseScreen extends StatelessWidget {
           // Input field
           ChatInput(
             textController: controller.textController,
-            onSend: controller.sendMessage,
+            // onSend: controller.sendMessage,
+            onSend: (value) async {
+              await controller.getBookRecommendations();
+            },
             isLoading: controller.isLoading,
           ),
         ],
