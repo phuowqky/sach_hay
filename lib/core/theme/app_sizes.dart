@@ -61,6 +61,8 @@ class AppSizes {
   static double get space56 => 56.w;
   static double get space60 => 60.w;
   static double get space64 => 64.w;
+  static double get space104 => 104.w;
+  static double get space404 => 404.w;
 
   // Border Radius
   static double get radius4 => 4.r;

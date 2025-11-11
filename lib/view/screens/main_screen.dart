@@ -43,6 +43,11 @@ class MainScreen extends StatelessWidget {
                 activeIcon: Icon(Icons.leaderboard),
                 label: 'Xếp hạng',
               ),
+              // BottomNavigationBarItem(
+              //   icon: Icon(Icons.chat_outlined),
+              //   activeIcon: Icon(Icons.chat),
+              //   label: 'Tư vấn',
+              // ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline),
                 activeIcon: Icon(Icons.person),
