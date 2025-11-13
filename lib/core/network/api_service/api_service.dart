@@ -1,12 +1,12 @@
-
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sach_hay/data/models/banner_model/banner_model.dart';
 import 'package:sach_hay/data/models/bookmark_model/bookmark_model.dart';
 import 'package:sach_hay/data/models/chapter_model/chapter_model.dart';
 import 'package:sach_hay/data/models/chapter_model/list_chapter_model.dart';
+import 'package:sach_hay/data/models/chat_model/message_request_model.dart';
 import 'package:sach_hay/data/models/trending_books/trending_book_model.dart';
-import 'dart:typed_data'; 
+import 'dart:typed_data';
 import '../../../data/models/book_model/book_model.dart';
 import '../../../data/models/login/login_model.dart';
 import '../../../data/models/new_book_model/new_book_model.dart';
@@ -42,7 +42,8 @@ abstract class ApiService {
   // ); // ✅ thêm
 
   @GET('/api/chapters/{bookId}')
-  Future<ApiResponseV2<List<ListChapterModel>>> getChapters(@Path("bookId") String bookId);
+  Future<ApiResponseV2<List<ListChapterModel>>> getChapters(
+      @Path("bookId") String bookId);
 
   @GET('/api/books/chapter/{bookId}/{index}')
   Future<ChapterModel> getChapterContent(
@@ -58,7 +59,7 @@ abstract class ApiService {
 
   @GET('/api/trending-books')
   Future<ApiResponse<List<TrendingBookModel>>> getTrendingBooks();
-  
+
   @GET('/api/banners')
   Future<ApiResponse<List<BannerModel>>> getBanners();
 
@@ -72,6 +73,8 @@ abstract class ApiService {
     @Path("userId") String userId,
     @Path("bookId") String bookId,
   );
-  
 
+  @POST('/api/bookrecommendations/{userId}')
+  Future<ApiResponseV2> getBookRecommendations(@Path("userId") String? userId,
+      @Body() MessageRequestModel? messageRequest);
 }
