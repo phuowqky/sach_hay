@@ -73,15 +73,15 @@ class _AppPageState extends State<AppPage> {
   final GoRouter _router = GoRouter(
     navigatorKey: navigatorKey,
     routes: <RouteBase>[
-      // GoRoute(
-      //   path: '/',
-      //   builder: (BuildContext context, GoRouterState state) {
-      //     return StartScreen();
-      //   },
-      // ),
-
       GoRoute(
         path: '/',
+        builder: (BuildContext context, GoRouterState state) {
+          return StartScreen();
+        },
+      ),
+
+      GoRoute(
+        path: '/main_screen',
         builder: (BuildContext context, GoRouterState state) {
           return MainScreen();
         },
