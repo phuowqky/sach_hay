@@ -1485,8 +1485,8 @@ class _BookScreenState extends State<BookScreen> {
                             return GestureDetector(
                               onTap: ()async{
 
-                                final pref = await UserStorage.saveBookId(book.id ?? '');
-                                final saveprefEpubName = await UserStorage.saveEpubFileName(book.epubFileName ?? '');
+                                // final pref = await UserStorage.saveBookId(book.id ?? '');
+                                // final saveprefEpubName = await UserStorage.saveEpubFileName(book.epubFileName ?? '');
 
                                 Navigator.push(
                                   context,

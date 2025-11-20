@@ -43,8 +43,9 @@ class _SignupScreenState extends State<SignupScreen> {
         body: Obx(() {
           return LoadingOverlay(
               isLoading: controller.isLoading.value,
-              successText: controller.successText.value,
-
+              // successText: controller.successText.value,
+              isSuccess: controller.isSuccess.value,
+              statusText: controller.successText.value,
               loadingText: "Đang đăng ký...",
               child: SingleChildScrollView(
                 child: Padding(

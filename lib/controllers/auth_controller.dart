@@ -13,8 +13,9 @@ import '../data/storage/user_storage.dart';
 class AuthController extends GetxController {
   Rx<String> message = "".obs;
   final isLoading = false.obs;
-  final isSuccess = false.obs;
-  final successText = ''.obs;
+  // RxBool isSuccess = false.obs;
+  RxnBool isSuccess = RxnBool(null);
+  RxString successText = ''.obs;
 
   final apiService = getIt<ApiService>();
 
@@ -100,6 +101,8 @@ class AuthController extends GetxController {
       successText.value = 'Có lỗi xảy ra, vui lòng thử lại';
     } finally {
       isLoading.value = false;
+      await Future.delayed(const Duration(seconds: 1));
+      isSuccess.value = null;
     }
   }
 
@@ -125,7 +128,9 @@ class AuthController extends GetxController {
       successText.value = 'Có lỗi xảy ra, vui lòng thử lại';
     } finally {
       isLoading.value = false;
-      isSuccess.value = false;
+      await Future.delayed(const Duration(seconds: 1));
+      isSuccess.value = null;
+
     }
   }
 }

@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Obx(() {
         return LoadingOverlay(
             isLoading: controller.isLoading.value,
-          successText: controller.successText.value,
+          // successText: controller.successText.value,
           loadingText: "Đang đăng nhập...",
 
           child: SafeArea(
