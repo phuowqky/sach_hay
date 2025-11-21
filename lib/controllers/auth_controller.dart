@@ -16,6 +16,8 @@ class AuthController extends GetxController {
   // RxBool isSuccess = false.obs;
   RxnBool isSuccess = RxnBool(null);
   RxString successText = ''.obs;
+  RxString errorRegister = ''.obs;
+  RxString errorLogin = ''.obs;
 
   final apiService = getIt<ApiService>();
 
@@ -45,6 +47,7 @@ class AuthController extends GetxController {
         log("Id User: ${res.data!.user?.id}");
         return true;
       } else {
+        errorLogin.value = res.message ?? "Lỗi không xác định";
         log('Login failed: ${res.message}');
         return false;
       }
@@ -69,6 +72,7 @@ class AuthController extends GetxController {
         log("fetch register successfully $res");
         return true;
       } else {
+        errorRegister.value = res.message ?? "Lỗi không xác định";
         log("Falled fetch register $res");
         return false;
       }
@@ -89,12 +93,12 @@ class AuthController extends GetxController {
       final success = await login(email, password);
       if (success) {
         isSuccess.value = true;
-        successText.value = 'Đăng nhập thành công';
+        // successText.value = 'Đăng nhập thành công';
         await Future.delayed(const Duration(milliseconds: 800));
         context.go('/main_screen');
       } else {
         isSuccess.value = false;
-        successText.value = 'Đăng nhập thất bại';
+        successText.value = '${errorLogin.value}';
       }
     } catch (e) {
       isSuccess.value = false;
@@ -122,6 +126,7 @@ class AuthController extends GetxController {
       }else{
         isSuccess.value = false;
         successText.value = 'Đăng ký thất bại';
+        successText.value = '${errorRegister.value}';
       }
     } catch (e) {
       isSuccess.value = false;

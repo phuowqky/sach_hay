@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -42,8 +40,10 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: AppColors.background,
       body: Obx(() {
         return LoadingOverlay(
-            isLoading: controller.isLoading.value,
+          isLoading: controller.isLoading.value,
           // successText: controller.successText.value,
+          // isSuccess: controller.isSuccess.value,
+          // statusText: controller.successText.value,
           loadingText: "Đang đăng nhập...",
 
           child: SafeArea(
@@ -55,52 +55,72 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: [
                       SizedBox(height: AppSizes.space60),
-          
+
                       // Logo
                       Image.asset(
                         'assets/images/reading-book.png',
                         height: 60,
                       ),
-          
+
                       SizedBox(height: AppSizes.space40),
-          
+
                       // Title
                       Text(
                         'Đăng nhập',
                         style: AppTextStyles.h3,
                       ),
-          
+
                       SizedBox(height: AppSizes.space32),
-          
+
                       // Email Field
+                      // CustomTextField(
+                      //   labelText: 'Email',
+                      //   focusNode: _emailFocus,
+                      //   textInputAction: TextInputAction.next,
+                      //   hintText: 'Nhập email của bạn',
+                      //   // controller: _emailController,
+                      //   // onFieldSubmitted: (_) =>
+                      //   //     FocusScope.of(context).requestFocus(_passwordFocus),
+                      //   onFieldSubmitted: (_) {
+                      //     FocusScope.of(context).requestFocus(_passwordFocus);
+                      //   },
+                      //   controller: _emailController,
+                      //
+                      //   keyboardType: TextInputType.emailAddress,
+                      //   validator: (value) {
+                      //     if (value == null || value.isEmpty) {
+                      //       return 'Vui lòng nhập email của bạn';
+                      //     }
+                      //     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                      //         .hasMatch(value)) {
+                      //       return 'Vui lòng nhập email hợp lệ';
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
                       CustomTextField(
                         labelText: 'Email',
-                        focusNode: _emailFocus,
                         textInputAction: TextInputAction.next,
                         hintText: 'Nhập email của bạn',
-                        // controller: _emailController,
-                        // onFieldSubmitted: (_) =>
-                        //     FocusScope.of(context).requestFocus(_passwordFocus),
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
                         onFieldSubmitted: (_) {
                           FocusScope.of(context).requestFocus(_passwordFocus);
                         },
-                        controller: _emailController,
-
-                        keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Vui lòng nhập email của bạn';
                           }
                           if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
                               .hasMatch(value)) {
-                            return 'Vui lòng nhập email hợp lệ';
+                            return 'Vui lòng nhập địa chỉ email hợp lệ';
                           }
                           return null;
                         },
                       ),
-          
+
                       SizedBox(height: AppSizes.space20),
-          
+
                       // Password Field
                       CustomTextField(
                         labelText: 'Password',
@@ -109,7 +129,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintText: 'Nhập mật khẩu của bạn',
                         controller: _passwordController,
                         onFieldSubmitted: (_) {
-                          FocusScope.of(context).unfocus(); // ẩn bàn phím khi nhấn done
+                          FocusScope.of(context)
+                              .unfocus(); // ẩn bàn phím khi nhấn done
                         },
                         obscureText: true,
                         validator: (value) {
@@ -138,15 +159,20 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-          
+
                       // const SizedBox(height: AppSizes.space32),
-          
+
                       // Sign In Button
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () async {
-                            controller. handelLogin(context, _emailController.text, _passwordController.text);
+                            if (_formKey.currentState!.validate()) {
+                              controller.handelLogin(
+                                  context,
+                                  _emailController.text,
+                                  _passwordController.text);
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
@@ -163,9 +189,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-          
+
                       SizedBox(height: AppSizes.space44),
-          
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -189,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-          
+
                       SizedBox(height: AppSizes.space20),
                     ],
                   ),
@@ -197,8 +223,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-        );}
-      ),
+        );
+      }),
     );
   }
 
