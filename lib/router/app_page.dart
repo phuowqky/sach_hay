@@ -12,6 +12,7 @@ import 'package:sach_hay/view/screens/book_details_screen.dart';
 import 'package:sach_hay/view/screens/home_screen.dart';
 import 'package:sach_hay/view/screens/library_book_screen.dart';
 import 'package:sach_hay/view/screens/main_screen.dart';
+import 'package:sach_hay/view/screens/profile_screen.dart';
 import 'package:sach_hay/view/screens/ranking_screen.dart';
 import 'package:sach_hay/view/screens/start_screen.dart';
 
@@ -73,12 +74,20 @@ class _AppPageState extends State<AppPage> {
   final GoRouter _router = GoRouter(
     navigatorKey: navigatorKey,
     routes: <RouteBase>[
+      // GoRoute(
+      //   path: '/',
+      //   builder: (BuildContext context, GoRouterState state) {
+      //     return StartScreen();
+      //   },
+      // ),
+
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return StartScreen();
+          return ProfileScreen();
         },
       ),
+
 
       GoRoute(
         path: '/main_screen',
