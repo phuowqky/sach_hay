@@ -27,9 +27,10 @@ class MainScreen extends StatelessWidget {
             selectedFontSize: 12,
             unselectedFontSize: 12,
             elevation: 8,
-            items: const [
+            items:  [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined),
+                // icon: Image.asset('assets/images/house.png'),
                 activeIcon: Icon(Icons.home),
                 label: 'Trang chủ',
               ),
