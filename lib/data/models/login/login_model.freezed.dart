@@ -192,7 +192,9 @@ mixin _$UserModel {
   String? get confirmPassword => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get userName => throw _privateConstructorUsedError;
+  List<String>? get favorites => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
+  String? get avt => throw _privateConstructorUsedError;
   int? get role => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -212,7 +214,9 @@ abstract class $UserModelCopyWith<$Res> {
       String? confirmPassword,
       String? phone,
       String? userName,
+      List<String>? favorites,
       String? email,
+      String? avt,
       int? role});
 }
 
@@ -234,7 +238,9 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? confirmPassword = freezed,
     Object? phone = freezed,
     Object? userName = freezed,
+    Object? favorites = freezed,
     Object? email = freezed,
+    Object? avt = freezed,
     Object? role = freezed,
   }) {
     return _then(_value.copyWith(
@@ -258,9 +264,17 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String?,
+      favorites: freezed == favorites
+          ? _value.favorites
+          : favorites // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avt: freezed == avt
+          ? _value.avt
+          : avt // ignore: cast_nullable_to_non_nullable
               as String?,
       role: freezed == role
           ? _value.role
@@ -284,7 +298,9 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String? confirmPassword,
       String? phone,
       String? userName,
+      List<String>? favorites,
       String? email,
+      String? avt,
       int? role});
 }
 
@@ -304,7 +320,9 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? confirmPassword = freezed,
     Object? phone = freezed,
     Object? userName = freezed,
+    Object? favorites = freezed,
     Object? email = freezed,
+    Object? avt = freezed,
     Object? role = freezed,
   }) {
     return _then(_$UserModelImpl(
@@ -328,9 +346,17 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String?,
+      favorites: freezed == favorites
+          ? _value._favorites
+          : favorites // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avt: freezed == avt
+          ? _value.avt
+          : avt // ignore: cast_nullable_to_non_nullable
               as String?,
       role: freezed == role
           ? _value.role
@@ -349,8 +375,11 @@ class _$UserModelImpl implements _UserModel {
       this.confirmPassword,
       this.phone,
       this.userName,
+      final List<String>? favorites,
       this.email,
-      this.role});
+      this.avt,
+      this.role})
+      : _favorites = favorites;
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
@@ -365,14 +394,26 @@ class _$UserModelImpl implements _UserModel {
   final String? phone;
   @override
   final String? userName;
+  final List<String>? _favorites;
+  @override
+  List<String>? get favorites {
+    final value = _favorites;
+    if (value == null) return null;
+    if (_favorites is EqualUnmodifiableListView) return _favorites;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final String? email;
+  @override
+  final String? avt;
   @override
   final int? role;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, password: $password, confirmPassword: $confirmPassword, phone: $phone, userName: $userName, email: $email, role: $role)';
+    return 'UserModel(id: $id, password: $password, confirmPassword: $confirmPassword, phone: $phone, userName: $userName, favorites: $favorites, email: $email, avt: $avt, role: $role)';
   }
 
   @override
@@ -388,14 +429,26 @@ class _$UserModelImpl implements _UserModel {
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
+            const DeepCollectionEquality()
+                .equals(other._favorites, _favorites) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.avt, avt) || other.avt == avt) &&
             (identical(other.role, role) || other.role == role));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, password, confirmPassword, phone, userName, email, role);
+      runtimeType,
+      id,
+      password,
+      confirmPassword,
+      phone,
+      userName,
+      const DeepCollectionEquality().hash(_favorites),
+      email,
+      avt,
+      role);
 
   @JsonKey(ignore: true)
   @override
@@ -418,7 +471,9 @@ abstract class _UserModel implements UserModel {
       final String? confirmPassword,
       final String? phone,
       final String? userName,
+      final List<String>? favorites,
       final String? email,
+      final String? avt,
       final int? role}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -435,7 +490,11 @@ abstract class _UserModel implements UserModel {
   @override
   String? get userName;
   @override
+  List<String>? get favorites;
+  @override
   String? get email;
+  @override
+  String? get avt;
   @override
   int? get role;
   @override

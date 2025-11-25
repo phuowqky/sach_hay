@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sach_hay/core/theme/app_colors.dart';
 import 'package:sach_hay/core/theme/app_sizes.dart';
 import 'package:sach_hay/core/theme/app_text_styles.dart';
@@ -48,6 +49,7 @@ class ProfileScreen extends StatelessWidget {
                   title: 'Hồ sơ của tôi',
                   onTap: () {
                     // Xử lý khi nhấn vào mục "Hồ sơ của tôi"
+                    context.push('/user_profile_screen');
                   },
                 ),
               ),

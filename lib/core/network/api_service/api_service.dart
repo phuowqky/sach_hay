@@ -77,4 +77,10 @@ abstract class ApiService {
   @POST('/api/bookrecommendations/{userId}')
   Future<ApiResponseV2> getBookRecommendations(@Path("userId") String? userId,
       @Body() MessageRequestModel? messageRequest);
+
+  @GET('/api/auth/me')
+  Future<ApiResponse<LoginModel>> getUserProfile(
+      @Header("Authorization") String token,
+      );
+
 }

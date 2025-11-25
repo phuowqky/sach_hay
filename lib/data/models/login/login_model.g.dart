@@ -25,7 +25,11 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       confirmPassword: json['confirmPassword'] as String?,
       phone: json['phone'] as String?,
       userName: json['userName'] as String?,
+      favorites: (json['favorites'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       email: json['email'] as String?,
+      avt: json['avt'] as String?,
       role: (json['role'] as num?)?.toInt(),
     );
 
@@ -36,6 +40,8 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'confirmPassword': instance.confirmPassword,
       'phone': instance.phone,
       'userName': instance.userName,
+      'favorites': instance.favorites,
       'email': instance.email,
+      'avt': instance.avt,
       'role': instance.role,
     };

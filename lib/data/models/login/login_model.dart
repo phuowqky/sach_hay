@@ -22,7 +22,9 @@ class UserModel with _$UserModel {
     String? confirmPassword,
     String? phone,
     String? userName,
+    List<String>? favorites,
     String? email,
+    String? avt,
     int? role,
   }) = _UserModel;
 

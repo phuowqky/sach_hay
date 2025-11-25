@@ -15,6 +15,7 @@ import 'package:sach_hay/view/screens/main_screen.dart';
 import 'package:sach_hay/view/screens/profile_screen.dart';
 import 'package:sach_hay/view/screens/ranking_screen.dart';
 import 'package:sach_hay/view/screens/start_screen.dart';
+import 'package:sach_hay/view/screens/user_profile_screen.dart';
 
 import '../data/storage/user_storage.dart';
 import '../view/screens/book_render_screen.dart';
@@ -151,6 +152,13 @@ class _AppPageState extends State<AppPage> {
         builder: (context, state) {
         return RankingScreen();
       }),
+
+      GoRoute(
+        path: '/user_profile_screen',
+        builder: (BuildContext context, GoRouterState state) {
+          return UserProfileScreen();
+        },
+      ),
 
       GoRoute(
           path: '/login_screen',

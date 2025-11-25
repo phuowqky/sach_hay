@@ -138,4 +138,18 @@ class AuthController extends GetxController {
 
     }
   }
+
+  Future<void> getUserProfile() async{
+    try {
+      final token = await UserStorage.getToken();
+      final res = await apiService.getUserProfile(token);
+      if(res.success){
+        log("User profile: ${res.data}");
+      }else{
+        log("Failed to get user profile: ${res.message}");
+      }
+    }catch(e){
+      log("Error get user profile: $e");
+    }
+  }
 }
