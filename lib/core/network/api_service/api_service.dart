@@ -82,5 +82,10 @@ abstract class ApiService {
   Future<ApiResponse<LoginModel>> getUserProfile(
       @Header("Authorization") String token,
       );
+  
+  @GET('/api/auth/avatar')
+  Future<ApiResponse<UserModel>> getAvatar(
+      @Header("Authorization") String token,
+      );
 
 }

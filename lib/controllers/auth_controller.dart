@@ -18,6 +18,7 @@ class AuthController extends GetxController {
   RxString successText = ''.obs;
   RxString errorRegister = ''.obs;
   RxString errorLogin = ''.obs;
+  Rxn<UserModel> userModel = Rxn<UserModel>();
 
   final apiService = getIt<ApiService>();
 
@@ -142,7 +143,9 @@ class AuthController extends GetxController {
   Future<void> getUserProfile() async{
     try {
       final token = await UserStorage.getToken();
-      final res = await apiService.getUserProfile(token);
+      // final res = await apiService.getUserProfile(token);
+      final res = await apiService.getUserProfile("Bearer $token");
+
       if(res.success){
         log("User profile: ${res.data}");
       }else{
@@ -150,6 +153,22 @@ class AuthController extends GetxController {
       }
     }catch(e){
       log("Error get user profile: $e");
+    }
+  }
+
+  Future<void> getAvatar() async {
+    try {
+      final token = await UserStorage.getToken();
+      final res = await apiService.getAvatar("Bearer $token");
+
+      if (res.success) {
+        log("User avatar: ${res.data}");
+        userModel.value = res.data;
+      } else {
+        log("Failed to get user avatar: ${res.message}");
+      }
+    } catch (e) {
+      log("Error get user avatar: $e");
     }
   }
 }

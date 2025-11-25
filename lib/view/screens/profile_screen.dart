@@ -1,15 +1,32 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sach_hay/core/theme/app_colors.dart';
 import 'package:sach_hay/core/theme/app_sizes.dart';
 import 'package:sach_hay/core/theme/app_text_styles.dart';
 
-class ProfileScreen extends StatelessWidget {
+import '../../controllers/auth_controller.dart';
+
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
   static const String profileScreen = '/profile_screen';
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final controller = Get.put<AuthController>(AuthController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.getAvatar();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 30,
-                        backgroundImage: NetworkImage('https://i.pinimg.com/1200x/e2/3f/53/e23f5308dbceb48a505cdf5fb7118156.jpg'),
+                        backgroundImage: NetworkImage(controller.userModel.value?.avt ?? 'https://i.pinimg.com/736x/ce/5f/89/ce5f891b397be684a5ace5174566184e.jpg'),
                       ),
                       SizedBox(width:  AppSizes.space12,),
                       Text("Phương Trường Kỳ", style: AppTextStyles.h6.copyWith(color: AppColors.white),)
