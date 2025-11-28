@@ -27,6 +27,26 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordFocus = FocusNode();
 
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // Tự động điền vào TextField
+      _emailController.text = "phuongtruongky14012004@gmail.com";
+      _passwordController.text = "14012004";
+
+      // Đợi TextField render
+      await Future.delayed(Duration(milliseconds: 200));
+
+      // Tự động login
+      // authC.handelLogin(
+      //   emailController.text,
+      //   passwordController.text,
+      // );
+    });
+  }
+
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();

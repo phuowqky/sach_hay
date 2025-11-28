@@ -11,6 +11,8 @@ import '../data/models/login/login_model.dart';
 import '../data/storage/user_storage.dart';
 
 class AuthController extends GetxController {
+
+
   Rx<String> message = "".obs;
   final isLoading = false.obs;
   // RxBool isSuccess = false.obs;
@@ -24,6 +26,7 @@ class AuthController extends GetxController {
 
 
   Future<bool> login(String email, String password) async {
+
 
     if (email.isEmpty || password.isEmpty) {
       message.value = "Please enter all required information.";
@@ -140,21 +143,21 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> getUserProfile() async{
-    try {
-      final token = await UserStorage.getToken();
-      // final res = await apiService.getUserProfile(token);
-      final res = await apiService.getUserProfile("Bearer $token");
-
-      if(res.success){
-        log("User profile: ${res.data}");
-      }else{
-        log("Failed to get user profile: ${res.message}");
-      }
-    }catch(e){
-      log("Error get user profile: $e");
-    }
-  }
+  // Future<void> getUserProfile() async{
+  //   try {
+  //     final token = await UserStorage.getToken();
+  //     // final res = await apiService.getUserProfile(token);
+  //     final res = await apiService.getUserProfile("Bearer $token");
+  //
+  //     if(res.success){
+  //       log("User profile: ${res.data}");
+  //     }else{
+  //       log("Failed to get user profile: ${res.message}");
+  //     }
+  //   }catch(e){
+  //     log("Error get user profile: $e");
+  //   }
+  // }
 
   Future<void> getAvatar() async {
     try {
@@ -171,4 +174,9 @@ class AuthController extends GetxController {
       log("Error get user avatar: $e");
     }
   }
+
+
+
+
+
 }

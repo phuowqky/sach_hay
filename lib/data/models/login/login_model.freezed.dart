@@ -20,8 +20,8 @@ LoginModel _$LoginModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LoginModel {
-  String get token => throw _privateConstructorUsedError;
-  UserModel get user => throw _privateConstructorUsedError;
+  String? get token => throw _privateConstructorUsedError;
+  UserModel? get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,9 +35,9 @@ abstract class $LoginModelCopyWith<$Res> {
           LoginModel value, $Res Function(LoginModel) then) =
       _$LoginModelCopyWithImpl<$Res, LoginModel>;
   @useResult
-  $Res call({String token, UserModel user});
+  $Res call({String? token, UserModel? user});
 
-  $UserModelCopyWith<$Res> get user;
+  $UserModelCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -53,25 +53,29 @@ class _$LoginModelCopyWithImpl<$Res, $Val extends LoginModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
-    Object? user = null,
+    Object? token = freezed,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
-      token: null == token
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      user: null == user
+              as String?,
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+              as UserModel?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res> get user {
-    return $UserModelCopyWith<$Res>(_value.user, (value) {
+  $UserModelCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserModelCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -85,10 +89,10 @@ abstract class _$$LoginModelImplCopyWith<$Res>
       __$$LoginModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String token, UserModel user});
+  $Res call({String? token, UserModel? user});
 
   @override
-  $UserModelCopyWith<$Res> get user;
+  $UserModelCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -102,18 +106,18 @@ class __$$LoginModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? token = null,
-    Object? user = null,
+    Object? token = freezed,
+    Object? user = freezed,
   }) {
     return _then(_$LoginModelImpl(
-      token: null == token
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      user: null == user
+              as String?,
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+              as UserModel?,
     ));
   }
 }
@@ -121,15 +125,15 @@ class __$$LoginModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$LoginModelImpl implements _LoginModel {
-  const _$LoginModelImpl({required this.token, required this.user});
+  const _$LoginModelImpl({this.token, this.user});
 
   factory _$LoginModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginModelImplFromJson(json);
 
   @override
-  final String token;
+  final String? token;
   @override
-  final UserModel user;
+  final UserModel? user;
 
   @override
   String toString() {
@@ -164,17 +168,16 @@ class _$LoginModelImpl implements _LoginModel {
 }
 
 abstract class _LoginModel implements LoginModel {
-  const factory _LoginModel(
-      {required final String token,
-      required final UserModel user}) = _$LoginModelImpl;
+  const factory _LoginModel({final String? token, final UserModel? user}) =
+      _$LoginModelImpl;
 
   factory _LoginModel.fromJson(Map<String, dynamic> json) =
       _$LoginModelImpl.fromJson;
 
   @override
-  String get token;
+  String? get token;
   @override
-  UserModel get user;
+  UserModel? get user;
   @override
   @JsonKey(ignore: true)
   _$$LoginModelImplCopyWith<_$LoginModelImpl> get copyWith =>

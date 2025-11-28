@@ -68,6 +68,7 @@ dependencies:
   epubx: ^4.0.0
   flutter_inappwebview: ^6.0.0
 
+
 dependency_overrides:
   xml: ^6.2.2
   image: ^4.0.15

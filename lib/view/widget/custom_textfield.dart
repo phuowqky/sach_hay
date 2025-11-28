@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,9 +25,13 @@ class CustomTextField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final void Function(String)? onFieldSubmitted;
   final FocusNode? focusNode;
+  final String? prefixImage;
+  final String? suffixImage;
 
   const CustomTextField({
     super.key,
+    this.prefixImage,
+    this.suffixImage,
     this.labelText,
     this.hintText,
     this.controller,
@@ -143,7 +146,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
               color: const Color(0xFF9CA3AF),
               fontSize: 16.sp,
             ),
-            prefixIcon: widget.prefixIcon,
+            // prefixIcon: widget.prefixIcon,
+            prefixIcon: _buildPrefixIcon(),
             suffixIcon: _buildSuffixIcon(),
             filled: true,
             fillColor: widget.fillColor ?? const Color(0xFFF9FAFB),
@@ -192,7 +196,24 @@ class _CustomTextFieldState extends State<CustomTextField> {
     );
   }
 
+  // Widget? _buildSuffixIcon() {
+  //   if (widget.obscureText) {
+  //     return IconButton(
+  //       icon: Icon(
+  //         _obscureText ? Icons.visibility_off : Icons.visibility,
+  //         color: const Color(0xFF6B7280),
+  //         size: 20.sp,
+  //       ),
+  //       onPressed: () {
+  //         setState(() => _obscureText = !_obscureText);
+  //       },
+  //     );
+  //   }
+  //   return widget.suffixIcon;
+  // }
+
   Widget? _buildSuffixIcon() {
+    // Nếu là field mật khẩu → toggle icon
     if (widget.obscureText) {
       return IconButton(
         icon: Icon(
@@ -205,6 +226,54 @@ class _CustomTextFieldState extends State<CustomTextField> {
         },
       );
     }
+
+    // Nếu có suffixImage → ưu tiên hiển thị ảnh
+    if (widget.suffixImage != null) {
+      return Padding(
+        padding: EdgeInsets.all(12.w),
+        child: Image.asset(
+          widget.suffixImage!,
+          width: 20.w,
+          height: 20.h,
+          fit: BoxFit.contain,
+        ),
+      );
+    }
+
+    // Nếu không có ảnh → dùng suffixIcon mặc định
     return widget.suffixIcon;
+  }
+
+  // Widget? _buildPrefixIcon() {
+  //   // Nếu người dùng truyền prefixImage → dùng ảnh
+  //   if (widget.prefixImage != null) {
+  //     return Padding(
+  //       padding: EdgeInsets.all(12.w),
+  //       child: Image.asset(
+  //         widget.prefixImage!,
+  //         width: 20.w,
+  //         height: 20.h,
+  //         fit: BoxFit.contain,
+  //       ),
+  //     );
+  //   }
+  //
+  //   // Nếu có prefixIcon → dùng widget đó
+  //   return widget.prefixIcon;
+  // }
+
+  Widget? _buildPrefixIcon() {
+    if (widget.prefixImage != null) {
+      return Padding(
+        padding: EdgeInsets.all(12.w),
+        child: Image.asset(
+          widget.prefixImage!,
+          width: 8.w,
+          height: 8.h,
+          fit: BoxFit.contain,
+        ),
+      );
+    }
+    return widget.prefixIcon;
   }
 }

@@ -6,8 +6,8 @@ part 'login_model.g.dart';
 @freezed
 class LoginModel with _$LoginModel {
   const factory LoginModel({
-    required String token,
-    required UserModel user,
+     String? token,
+     UserModel? user,
   }) = _LoginModel;
 
   factory LoginModel.fromJson(Map<String, dynamic> json) =>

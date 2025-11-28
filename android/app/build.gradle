@@ -78,6 +78,27 @@ android {
     }
 
     // ← Thêm signingConfig cho release
+//    signingConfigs {
+//        release {
+//            keyAlias keystoreProperties['keyAlias']
+//            keyPassword keystoreProperties['keyPassword']
+//            storeFile file(keystoreProperties['storeFile'])
+//            storePassword keystoreProperties['storePassword']
+//        }
+//    }
+//
+//    buildTypes {
+//        debug {
+//            signingConfig signingConfigs.debug
+//        }
+//        release {
+//            signingConfig signingConfigs.release
+//            minifyEnabled true
+//            shrinkResources true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+//    }
+
     signingConfigs {
         release {
             keyAlias keystoreProperties['keyAlias']
@@ -88,9 +109,6 @@ android {
     }
 
     buildTypes {
-        debug {
-            signingConfig signingConfigs.debug
-        }
         release {
             signingConfig signingConfigs.release
             minifyEnabled true
