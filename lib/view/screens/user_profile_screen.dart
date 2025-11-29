@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sach_hay/controllers/auth_controller.dart';
 import 'package:sach_hay/controllers/user_detail_controller.dart';
@@ -48,16 +49,20 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             SizedBox(height: AppSizes.space48,),
             GestureDetector(
               onTap: (){
-
+                controller.pickImage();
               },
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(
-                  controller.avt.value
-                      // 'https://i.pinimg.com/736x/ce/5f/89/ce5f891b397be684a5ace5174566184e.jpg', // link tạm
-                ),
+              child: Obx((){
+                return CircleAvatar(
+                  radius: 50,
+                  // backgroundImage: NetworkImage(
+                  //   controller.avt.value
+                  //       // 'https://i.pinimg.com/736x/ce/5f/89/ce5f891b397be684a5ace5174566184e.jpg', // link tạm
+                  // ),
 
-                // backgroundImage: controller.userModel.value.avt != null ? FileImage(controller.userModel.value.avt!) : ,
+                  backgroundImage: controller.pickedImage.value !=null ? FileImage(controller.pickedImage.value!) : NetworkImage(controller.avt.value) as ImageProvider,
+
+                  // backgroundImage: controller.userModel.value.avt != null ? FileImage(controller.userModel.value.avt!) : ,
+                );}
               ),
             ),
 
@@ -108,7 +113,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     hintText: 'Nhập số điện thoại',
                     // controller: TextEditingController(text: controller.userModel.value?.name ?? ''),
                   ),
-                  SizedBox(height: AppSizes.space20,),
+                  SizedBox(height: AppSizes.space40,),
                   // Row(
                   //   children: [
                   //     // Back to Login Button
@@ -273,10 +278,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 ],
               ),
             ),
-
-
           ],
-
         ),
       ),
     );

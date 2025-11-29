@@ -1,7 +1,9 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sach_hay/core/network/api_service/api_service.dart';
 import 'package:sach_hay/data/models/login/login_model.dart';
 import 'package:sach_hay/data/storage/user_storage.dart';
@@ -16,6 +18,19 @@ class UserDetailController extends GetxController{
   TextEditingController idController = TextEditingController();
   // Rxn<UserModel> userModel = Rxn<UserModel>();
   Rx<String> avt = ''.obs;
+  Rx<File?> pickedImage = Rx<File?>(null);
+
+  Future<void> pickImage() async{
+    final ImagePicker picker = ImagePicker(); //ImagePicker là plugin để mở gallery hoặc camera, tạo một object để gọi hàm lấy ảnh
+    final XFile? img = await picker.pickImage(
+        source: ImageSource.gallery //mở thư viện ảnh.
+    );
+    
+    if(img != null){
+      pickedImage.value = File(img.path); //File(img.path) chuyển đường dẫn ảnh thành file để dùng trong Flutter
+    }
+  }
+
   Future<void> getUserProfile() async{
     try {
       final token = await UserStorage.getToken();
