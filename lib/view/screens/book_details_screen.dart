@@ -115,7 +115,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                             ),
                             child:  InkWell(
                               onTap: (){
-                                Get.back();
+                                context.pop();
                               },
                               child: const Row(
                                 mainAxisSize: MainAxisSize.min,

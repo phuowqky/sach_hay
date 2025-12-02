@@ -39,29 +39,27 @@ class AdviseScreen extends StatelessWidget {
           backgroundColor: AppColors.primary,
           foregroundColor: AppColors.white,
         ),
-        body: Container(
-          margin: EdgeInsets.all(AppSizes.space8),
-          child: Column(
-            children: [
-              // danh sách chat
-          
-              Expanded(
-                child: ChatList(
-                  messages: controller.messages,
-                  scrollController: controller.scrollController,
-                ),
+        body: Column(
+          children: [
+            // danh sách chat
+            SizedBox(height: AppSizes.space8),
+
+            Expanded(
+              child: ChatList(
+                messages: controller.messages,
+                scrollController: controller.scrollController,
               ),
-          
-              // ô nhập
-              ChatInput(
-                textController: controller.textController,
-                onSend: (value) {
-                  controller.sendMessage(value);
-                },
-                isLoading: controller.isLoading,
-              ),
-            ],
-          ),
+            ),
+
+            // ô nhập
+            ChatInput(
+              textController: controller.textController,
+              onSend: (value) {
+                controller.sendMessage(value);
+              },
+              isLoading: controller.isLoading,
+            ),
+          ],
         ),
       ),
     );
