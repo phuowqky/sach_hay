@@ -98,64 +98,50 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                           Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 12, vertical: 8),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.15),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
-                                color: Colors.white.withOpacity(0.2),
-                                width: 1,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 4),
-                                ),
-                              ],
-                            ),
+                            // decoration: BoxDecoration(
+                            //   color: Colors.white.withOpacity(0.15),
+                            //   borderRadius: BorderRadius.circular(20),
+                            //   border: Border.all(
+                            //     color: Colors.white.withOpacity(0.2),
+                            //     width: 1,
+                            //   ),
+                            //   boxShadow: [
+                            //     BoxShadow(
+                            //       color: Colors.black.withOpacity(0.1),
+                            //       blurRadius: 10,
+                            //       offset: const Offset(0, 4),
+                            //     ),
+                            //   ],
+                            // ),
                             child:  InkWell(
                               onTap: (){
                                 context.pop();
                               },
-                              child: const Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(
-                                    Icons.arrow_back_ios,
-                                    color: Colors.white,
-                                    size: 18,
-                                  ),
-                                  SizedBox(width: 4),
-                                  Text(
-                                    'Back',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                                size: 18,
                               ),
                             ),
                           ),
                           // Favorite button with animation potential
                           Container(
                             padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.15),
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.white.withOpacity(0.2),
-                                width: 1,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 4),
-                                ),
-                              ],
-                            ),
+                            // decoration: BoxDecoration(
+                            //   color: Colors.white.withOpacity(0.15),
+                            //   shape: BoxShape.circle,
+                            //   border: Border.all(
+                            //     color: Colors.white.withOpacity(0.2),
+                            //     width: 1,
+                            //   ),
+                            //   boxShadow: [
+                            //     BoxShadow(
+                            //       color: Colors.black.withOpacity(0.1),
+                            //       blurRadius: 10,
+                            //       offset: const Offset(0, 4),
+                            //     ),
+                            //   ],
+                            // ),
                             child: const Icon(
                               Icons.favorite_border,
                               color: Colors.white,
