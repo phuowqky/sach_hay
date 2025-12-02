@@ -522,24 +522,31 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                                   child: InkWell(
                                     borderRadius: BorderRadius.circular(16),
                                     onTap: () async {},
-                                    child: const Center(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(Icons.menu_book,
-                                              color: Colors.white, size: 20),
-                                          SizedBox(width: 10),
-                                          Text(
-                                            'READ BOOK',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                              letterSpacing: 0.8,
+                                    child: Center(
+                                      child: InkWell(
+                                        onTap: () {
+                                          final bookId = bookscontroller.bookDetails.value?.id ?? '';
+
+                                          context.push('/reading_chapter?bookId=$bookId&index=0');
+                                        },
+                                        child: const Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.menu_book,
+                                                color: Colors.white, size: 20),
+                                            SizedBox(width: 10),
+                                            Text(
+                                              'READ BOOK',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                                letterSpacing: 0.8,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),

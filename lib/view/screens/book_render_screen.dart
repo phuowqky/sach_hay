@@ -22,8 +22,8 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
   @override
   void initState() {
     super.initState();
-
-    // ✅ Gọi API lấy nội dung chương ngay khi vào màn hình
+    controller.currentBookId = widget.bookId; // 👈 GÁN Ở ĐÂY
+    //  Gọi API lấy nội dung chương ngay khi vào màn hình
     controller.getChapterContent(
       bookId: widget.bookId,
       index: widget.chapterIndex,
@@ -195,7 +195,7 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF8B4513),
+                          color: AppColors.primary,
                         ),
                       ),
                       const SizedBox(height: 12),
@@ -204,17 +204,17 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.remove_circle_outline),
-                            color: const Color(0xFF8B4513),
+                            color:  AppColors.primary,
                             onPressed: () => _adjustFontSize(-2),
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 8),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFFF8E7),
+                              color: AppColors.white,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
-                                color: const Color(0xFF8B4513).withOpacity(0.3),
+                                color: AppColors.primary,
                               ),
                             ),
                             child: Text(
@@ -222,13 +222,13 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
                               style: TextStyle(
                                 fontSize: _fontSize,
                                 fontWeight: FontWeight.bold,
-                                color: const Color(0xFF8B4513),
+                                color: AppColors.primary
                               ),
                             ),
                           ),
                           IconButton(
                             icon: const Icon(Icons.add_circle_outline),
-                            color: const Color(0xFF8B4513),
+                            color: AppColors.primary,
                             onPressed: () => _adjustFontSize(2),
                           ),
                         ],
@@ -264,6 +264,7 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
                   onPressed: controller.chapterIndex.value > 0
                       ? () {
                     // TODO: Chuyển chương trước
+                    controller.previousChapter();
                   }
                       : null,
                   icon: const Icon(Icons.chevron_left),
@@ -288,6 +289,7 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
                 ),
                 ElevatedButton.icon(
                   onPressed: () {
+                    controller.nextChapter();
                     // TODO: Chuyển chương sau
                   },
                   icon: const Icon(Icons.chevron_right),

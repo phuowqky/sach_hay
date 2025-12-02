@@ -17,6 +17,8 @@ class ContentBookController extends GetxController {
   var content = ''.obs;
   var errorMessage = ''.obs;
 
+  late String currentBookId;
+
   void onInit() {
     super.onInit();
     // getChapterContent();
@@ -68,6 +70,24 @@ class ContentBookController extends GetxController {
       log("Error getting content book: $e, stack: $stack");
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  /// 🔵 Chuyển sang chương tiếp theo
+  Future<void> nextChapter() async {
+    await getChapterContent(
+      bookId: currentBookId,
+      index: chapterIndex.value + 1,
+    );
+  }
+
+  /// 🔵 Quay lại chương trước
+  Future<void> previousChapter() async {
+    if (chapterIndex.value > 0) {
+      await getChapterContent(
+        bookId: currentBookId,
+        index: chapterIndex.value - 1,
+      );
     }
   }
 }
