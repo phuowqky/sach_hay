@@ -159,6 +159,60 @@ class AuthController extends GetxController {
   //   }
   // }
 
+  // Future<void> updateUser(UserModel update) async {
+  //   final token = await UserStorage.getToken();
+  //   try {
+  //     isLoading.value = true;
+  //
+  //     final response = await apiService.updateUser(update, "Bearer $token");
+  //
+  //     // ---- bạn cần check response.success hoặc status code ----
+  //     if (response != null && response.success) {
+  //       Get.snackbar("Thành công", "Cập nhật thông tin thành công");
+  //       print("Update success: $response");
+  //     } else {
+  //       Get.snackbar("Lỗi", "Cập nhật thất bại: ${response?.message ?? 'Không xác định'}");
+  //     }
+  //   } catch (e) {
+  //     print("Update failed: $e");
+  //     Get.snackbar("Lỗi", "Cập nhật thất bại: $e");
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
+
+  Future<void> updateUser(UserModel update) async {
+    try {
+      isLoading.value = true;
+
+      // Lấy token
+      final token = await UserStorage.getToken();
+      if (token.isEmpty) {
+        Get.snackbar("Lỗi", "Không tìm thấy token, vui lòng đăng nhập lại");
+        return;
+      }
+
+      // Gọi API với token
+      final response = await apiService.updateUser("Bearer $token", update);
+
+      // Xử lý response
+      if (response.success) {
+        Get.snackbar("Thành công", "Cập nhật thông tin thành công");
+        userModel.value = response.data; // cập nhật thông tin user trong controller
+        print("Update success: ${response.data}");
+      } else {
+        Get.snackbar("Lỗi", "Cập nhật thất bại: ${response.message}");
+        print("Update failed: ${response.message}");
+      }
+    } catch (e) {
+      print("Update error: $e");
+      Get.snackbar("Lỗi", "Cập nhật thất bại: $e");
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+
   Future<void> getAvatar() async {
     try {
       final token = await UserStorage.getToken();
@@ -173,6 +227,21 @@ class AuthController extends GetxController {
     } catch (e) {
       log("Error get user avatar: $e");
     }
+
+    // Future<void> updateProfile(LoginModel update) async {
+    //   try {
+    //     isLoading.value = true;
+    //     final response = await apiService.updateUser(update);
+    //     print("Update success: $response");
+    //   } catch (e) {
+    //     print("Update failed: $e");
+    //   } finally {
+    //     isLoading.value = false;
+    //   }
+    // }
+
+
+
   }
 
 

@@ -9,7 +9,10 @@ import 'package:sach_hay/controllers/user_detail_controller.dart';
 import 'package:sach_hay/core/theme/app_colors.dart';
 import 'package:sach_hay/core/theme/app_sizes.dart';
 import 'package:sach_hay/core/theme/app_text_styles.dart';
+import 'package:sach_hay/data/models/login/login_model.dart';
 import 'package:sach_hay/view/widget/custom_textfield.dart';
+
+import '../widget/show_confirm_dialog.dart';
 
 class UserProfileScreen extends StatefulWidget {
    UserProfileScreen({super.key});
@@ -21,6 +24,7 @@ class UserProfileScreen extends StatefulWidget {
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
   final controller = Get.put<UserDetailController>(UserDetailController());
+  final updateController = Get.put<AuthController>(AuthController());
   @override
   void initState() {
     // TODO: implement initState
@@ -248,8 +252,17 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 icon: Icons.info_outline,
                                 iconColor: const Color(0xFF3B82F6),
                                 onConfirm: () {
-                                  // TODO: Implement update info logic
-                                  print('Cập nhật thông tin');
+                                  final update = UserModel(
+                                    id: controller.idController.text,
+                                    userName: controller.nameController.text,
+                                    email: controller.emailController.text,
+                                    phone: controller.phoneController.text,
+                                    avt: controller.pickedImage.value != null
+                                        ? controller.pickedImage.value!.path
+                                        : controller.avt.value,
+                                  );
+
+                                  updateController.updateUser(update);
                                 },
                               );
                             },
@@ -286,85 +299,85 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 }
 
 
-Future<void> showConfirmDialog(
-    BuildContext context, {
-      required String title,
-      required String message,
-      required String confirmText,
-      required VoidCallback onConfirm,
-      Color? confirmColor,
-      IconData? icon,
-      Color? iconColor,
-    }) {
-  return showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        backgroundColor: AppColors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16.r),
-        ),
-        title: Row(
-          children: [
-            Icon(
-              icon ?? Icons.info_outline,
-              color: iconColor ?? const Color(0xFF3B82F6),
-              size: 28.sp,
-            ),
-            SizedBox(width: 8.w),
-            Expanded(
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
-        content: Text(
-          message,
-          style: TextStyle(
-            fontSize: 16.sp,
-            color: Colors.grey[700],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              'Hủy',
-              style: TextStyle(
-                fontSize: 16.sp,
-                color: Colors.grey[600],
-              ),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              onConfirm();
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: confirmColor ?? const Color(0xFF3B82F6),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-            ),
-            child: Text(
-              confirmText,
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: AppColors.white
-              ),
-            ),
-          ),
-        ],
-      );
-    },
-  );
-}
+// Future<void> showConfirmDialog(
+//     BuildContext context, {
+//       required String title,
+//       required String message,
+//       required String confirmText,
+//       required VoidCallback onConfirm,
+//       Color? confirmColor,
+//       IconData? icon,
+//       Color? iconColor,
+//     }) {
+//   return showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return AlertDialog(
+//         backgroundColor: AppColors.white,
+//         shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(16.r),
+//         ),
+//         title: Row(
+//           children: [
+//             Icon(
+//               icon ?? Icons.info_outline,
+//               color: iconColor ?? const Color(0xFF3B82F6),
+//               size: 28.sp,
+//             ),
+//             SizedBox(width: 8.w),
+//             Expanded(
+//               child: Text(
+//                 title,
+//                 style: TextStyle(
+//                   fontSize: 20.sp,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//         content: Text(
+//           message,
+//           style: TextStyle(
+//             fontSize: 16.sp,
+//             color: Colors.grey[700],
+//           ),
+//         ),
+//         actions: [
+//           TextButton(
+//             onPressed: () {
+//               Navigator.of(context).pop();
+//             },
+//             child: Text(
+//               'Hủy',
+//               style: TextStyle(
+//                 fontSize: 16.sp,
+//                 color: Colors.grey[600],
+//               ),
+//             ),
+//           ),
+//           ElevatedButton(
+//             onPressed: () {
+//               Navigator.of(context).pop();
+//               onConfirm();
+//             },
+//             style: ElevatedButton.styleFrom(
+//               backgroundColor: confirmColor ?? const Color(0xFF3B82F6),
+//               shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.circular(8.r),
+//               ),
+//             ),
+//             child: Text(
+//               confirmText,
+//               style: TextStyle(
+//                 fontSize: 16.sp,
+//                 fontWeight: FontWeight.w600,
+//                 color: AppColors.white
+//               ),
+//             ),
+//           ),
+//         ],
+//       );
+//     },
+//   );
+// }

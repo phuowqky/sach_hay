@@ -88,4 +88,9 @@ abstract class ApiService {
       @Header("Authorization") String token,
       );
 
+  @PUT("/api/auth/update")
+  Future<ApiResponse<UserModel>> updateUser(
+      @Header("Authorization") String token,
+      @Body() UserModel update);
+
 }
