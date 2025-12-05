@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // Tự động điền vào TextField
-      _emailController.text = "phuongtruongky14012004@gmail.com";
+      _emailController.text = "phgky15@gmail.com";
       _passwordController.text = "14012004";
 
       // Đợi TextField render

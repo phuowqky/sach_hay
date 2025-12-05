@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sach_hay/controllers/content_book_controller.dart';
+import 'package:sach_hay/core/util/tts_service.dart';
 
 import '../../core/theme/app_colors.dart';
 
 class ReadingChapterScreen extends StatefulWidget {
   final String bookId;
   final int chapterIndex;
-  const ReadingChapterScreen({super.key, required this.bookId, required this.chapterIndex});
+
+  const ReadingChapterScreen(
+      {super.key, required this.bookId, required this.chapterIndex});
 
   @override
   State<ReadingChapterScreen> createState() => _ReadingChapterScreenState();
@@ -22,15 +25,19 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
   @override
   void initState() {
     super.initState();
-    controller.currentBookId = widget.bookId; // 👈 GÁN Ở ĐÂY
+    controller.currentBookId = widget.bookId;
+    // tts = TtsService();
     //  Gọi API lấy nội dung chương ngay khi vào màn hình
+
     controller.getChapterContent(
       bookId: widget.bookId,
       index: widget.chapterIndex,
     );
   }
+
   @override
   void dispose() {
+    // tts.stop(); // <-- GIẢI PHÓNG AUDIO
     _scrollController.dispose();
     super.dispose();
   }
@@ -41,51 +48,88 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
     });
   }
 
+  void readChapter() {
+    controller.readChapter(); // ✔️ gọi ở controller
+  }
+
+  // void stopReading() {
+  //   controller.stopReading(); // ✔️ gọi ở controller
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        elevation: 0,
-        titleSpacing: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Obx(() => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              controller.bookTitle.value,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              controller.chapterTitle.value,
-              style: const TextStyle(
-                color: Colors.white70,
-                fontSize: 13,
-              ),
-            ),
-          ],
-        )),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.text_fields, color: Colors.white),
-            onPressed: () => setState(() => _showSettings = !_showSettings),
+          backgroundColor: AppColors.primary,
+          elevation: 0,
+          titleSpacing: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.pop(context),
           ),
-          IconButton(
-            icon: const Icon(Icons.bookmark_border, color: Colors.white),
-            onPressed: () {
-              // TODO: Thêm chức năng bookmark
-            },
-          ),
-        ],
-      ),
+          title: Obx(() => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    controller.bookTitle.value,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    controller.chapterTitle.value,
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              )),
+          // actions: [
+          //   IconButton(
+          //     icon: const Icon(Icons.volume_up, color: Colors.white),
+          //     onPressed: readChapter,
+          //   ),
+          //   IconButton(
+          //     icon: const Icon(Icons.stop, color: Colors.white),
+          //     onPressed: stopReading,
+          //   ),
+          //   IconButton(
+          //     icon: const Icon(Icons.text_fields, color: Colors.white),
+          //     onPressed: () => setState(() => _showSettings = !_showSettings),
+          //   ),
+          //   IconButton(
+          //     icon: const Icon(Icons.bookmark_border, color: Colors.white),
+          //     onPressed: () {
+          //       // TODO: Thêm chức năng bookmark
+          //     },
+          //   ),
+          // ],
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.volume_up, color: Colors.white),
+              onPressed: () {
+                controller.readChapter();
+              }, // đọc sách
+            ),
+            // IconButton(
+            //   icon: const Icon(Icons.stop, color: Colors.white),
+            //   onPressed: stopReading, // dừng đọc
+            // ),
+            IconButton(
+              icon: const Icon(Icons.text_fields, color: Colors.white),
+              onPressed: () => setState(() => _showSettings = !_showSettings),
+            ),
+            IconButton(
+              icon: const Icon(Icons.bookmark_border, color: Colors.white),
+              onPressed: () {
+                // TODO: bookmark chương này
+              },
+            ),
+          ]),
 
       // ================= BODY =================
       body: Obx(() {
@@ -100,20 +144,23 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.error_outline, size: 60, color: Color(0xFF8B4513)),
+                const Icon(Icons.error_outline,
+                    size: 60, color: Color(0xFF8B4513)),
                 const SizedBox(height: 12),
                 Text(
                   controller.errorMessage.value,
-                  style: const TextStyle(fontSize: 16, color: Color(0xFF8B4513)),
+                  style:
+                      const TextStyle(fontSize: 16, color: Color(0xFF8B4513)),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: (){},
+                  onPressed: () {},
                   // onPressed: controller.getChapterContent,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF8B4513),
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 12),
                   ),
                   child: const Text('Thử lại'),
                 ),
@@ -204,7 +251,7 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.remove_circle_outline),
-                            color:  AppColors.primary,
+                            color: AppColors.primary,
                             onPressed: () => _adjustFontSize(-2),
                           ),
                           Container(
@@ -220,10 +267,9 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
                             child: Text(
                               '${_fontSize.toInt()}',
                               style: TextStyle(
-                                fontSize: _fontSize,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primary
-                              ),
+                                  fontSize: _fontSize,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.primary),
                             ),
                           ),
                           IconButton(
@@ -243,72 +289,72 @@ class _ReadingChapterScreenState extends State<ReadingChapterScreen> {
 
       // ================= BOTTOM NAVIGATION =================
       bottomNavigationBar: Obx(() => Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 8,
-              offset: const Offset(0, -3),
-            ),
-          ],
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton.icon(
-                  onPressed: controller.chapterIndex.value > 0
-                      ? () {
-                    // TODO: Chuyển chương trước
-                    controller.previousChapter();
-                  }
-                      : null,
-                  icon: const Icon(Icons.chevron_left),
-                  label: const Text('Trước'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                ),
-                Text(
-                  '${controller.chapterIndex.value + 1}',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    controller.nextChapter();
-                    // TODO: Chuyển chương sau
-                  },
-                  icon: const Icon(Icons.chevron_right),
-                  label: const Text('Sau'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 8,
+                  offset: const Offset(0, -3),
                 ),
               ],
             ),
-          ),
-        ),
-      )),
+            child: SafeArea(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton.icon(
+                      onPressed: controller.chapterIndex.value > 0
+                          ? () {
+                              // TODO: Chuyển chương trước
+                              controller.previousChapter();
+                            }
+                          : null,
+                      icon: const Icon(Icons.chevron_left),
+                      label: const Text('Trước'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '${controller.chapterIndex.value + 1}',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        controller.nextChapter();
+                        // TODO: Chuyển chương sau
+                      },
+                      icon: const Icon(Icons.chevron_right),
+                      label: const Text('Sau'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )),
     );
   }
 }
