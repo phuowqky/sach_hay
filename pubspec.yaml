@@ -67,6 +67,7 @@ dependencies:
   path_provider: ^2.1.2
   epubx: ^4.0.0
   flutter_inappwebview: ^6.0.0
+  flutter_tts: ^4.2.3
 
 
 dependency_overrides:
