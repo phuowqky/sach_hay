@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class ContentBookController extends GetxController {
   var errorMessage = ''.obs;
   var isReading = false.obs;
   final FlutterTts tts = FlutterTts();
+  var _isStopped = false;
 
   late String currentBookId;
 
@@ -77,54 +79,69 @@ class ContentBookController extends GetxController {
     });
   }
 
-  // Future<void> readChapter() async {
-  //   final text = content.value.trim();
+  Future<void> onComplete() async {
+    Completer completer = Completer();
+    tts.setCompletionHandler(() {
+      completer.complete();
+    });
+    return completer.future;
+  }
+
+  // Future<void> speakLongText(String text) async {
+  //   _isStopped = false;
+  //   final chunks = splitText(text);
   //
-  //   if (text.isEmpty) {
-  //     log("Content is empty, cannot read");
-  //     return;
+  //   for (final part in chunks) {
+  //     if (_isStopped) break;
+  //     await tts.speak(part);
+  //     await Future.delayed(Duration(milliseconds: 200));
+  //
+  //     // đợi engine đọc xong mỗi phần
+  //     await onComplete();
   //   }
-  //
-  //   await tts.stop(); // dừng đọc cũ
-  //   await tts.speak(text);
   // }
+
+  Future<void> speakLongText(String text) async {
+    final chunks = splitText(text);
+
+    for (final part in chunks) {
+      if (_isStopped) break; // nếu người dùng stop, thoát vòng lặp
+      await tts.speak(part);
+      await Future.delayed(Duration(milliseconds: 200));
+      await onComplete(); // đợi đọc xong chunk hiện tại
+    }
+  }
 
   // Future<void> readChapter() async {
   //   final text = content.value;
   //
   //   if (text.isEmpty) {
-  //     log("Content is empty, cannot read");
+  //     log("Content is empty!");
   //     return;
   //   }
-  //
-  //   await tts.stop(); // đảm bảo không đọc chồng
-  //   await tts.speak(text);
-  // }
-  //
-  // Future<void> stopReading() async {
+  //   _isStopped = true;
   //   await tts.stop();
-  // }
+  //   await Future.delayed(Duration(milliseconds: 200));
   //
-  // Future<void> pauseReading() async {
-  //   await tts.pause();
+  //   await speakLongText(text); // <-- Đã chia đoạn
   // }
 
   Future<void> readChapter() async {
-    final text = content.value.trim();
+    final text = content.value;
 
     if (text.isEmpty) {
-      log("Content empty");
+      log("Content is empty!");
       return;
     }
 
-    await tts.stop();
+    // Dừng chương cũ nếu đang đọc
+    await stopReading();
+    await Future.delayed(Duration(milliseconds: 200));
 
-    final chunks = splitText(text);
+    // Reset cờ trước khi đọc chương mới
+    _isStopped = false;
 
-    for (final chunk in chunks) {
-      await tts.speak(chunk);
-      await Future.delayed(Duration(milliseconds: 300)); // tránh speak chồng
-    }
+    await speakLongText(text); // <-- Đã chia đoạn
   }
 
   // Future<void> resumeReading() async {
@@ -156,8 +173,16 @@ class ContentBookController extends GetxController {
     }
   }
 
+  Future<void> stopReading() async {
+    _isStopped = true;
+    await tts.stop();
+  }
+
   /// 🔵 Chuyển sang chương tiếp theo
   Future<void> nextChapter() async {
+    _isStopped = true; // dừng đọc chương cũ
+    await tts.stop();
+    await Future.delayed(Duration(milliseconds: 200));
     await getChapterContent(
       bookId: currentBookId,
       index: chapterIndex.value + 1,
@@ -167,6 +192,9 @@ class ContentBookController extends GetxController {
   /// 🔵 Quay lại chương trước
   Future<void> previousChapter() async {
     if (chapterIndex.value > 0) {
+      _isStopped = true; // dừng đọc chương cũ
+      await tts.stop();
+      await Future.delayed(Duration(milliseconds: 200));
       await getChapterContent(
         bookId: currentBookId,
         index: chapterIndex.value - 1,
@@ -175,13 +203,25 @@ class ContentBookController extends GetxController {
   }
 }
 
+// List<String> splitText(String text, {int chunkSize = 3000}) {
+//   List<String> chunks = [];
+//   for (int i = 0; i < text.length; i += chunkSize) {
+//     chunks.add(
+//       text.substring(
+//           i, i + chunkSize > text.length ? text.length : i + chunkSize),
+//     );
+//   }
+//   return chunks;
+// }
 List<String> splitText(String text, {int chunkSize = 3000}) {
   List<String> chunks = [];
-  for (int i = 0; i < text.length; i += chunkSize) {
-    chunks.add(
-      text.substring(
-          i, i + chunkSize > text.length ? text.length : i + chunkSize),
-    );
+  int start = 0;
+
+  while (start < text.length) {
+    int end = start + chunkSize;
+    if (end > text.length) end = text.length;
+    chunks.add(text.substring(start, end));
+    start = end;
   }
   return chunks;
 }
