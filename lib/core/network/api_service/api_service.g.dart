@@ -655,6 +655,42 @@ class _ApiService implements ApiService {
     return _value;
   }
 
+  @override
+  Future<ApiResponseV2<SearchResponseModel>> searchBooks(String keyword) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'q': keyword};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<ApiResponseV2<SearchResponseModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/search',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponseV2<SearchResponseModel> _value;
+    try {
+      _value = ApiResponseV2<SearchResponseModel>.fromJson(
+        _result.data!,
+        (json) => SearchResponseModel.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

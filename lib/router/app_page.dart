@@ -21,6 +21,7 @@ import '../data/storage/user_storage.dart';
 import '../view/screens/book_render_screen.dart';
 import '../view/screens/book_screen.dart';
 import '../view/screens/login_screen.dart';
+import '../view/screens/search_screen.dart';
 import '../view/screens/signup_screen.dart';
 import '../core/di/common_features.dart';
 
@@ -42,25 +43,25 @@ class _AppPageState extends State<AppPage> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(390, 844), // iPhone 12 Pro kích thước tham chiếu
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-      return MaterialApp.router(
-        routerConfig: _router,
-        debugShowCheckedModeBanner: false,
-        builder: (context, widget) {
-          // Quan trọng: gắn MediaQuery để cập nhật scale cho toàn app
-          // ScreenUtil.setContext(context);
-          return widget!;
-        },
-        // locale: const Locale('vi', 'VN'),
-        localizationsDelegates: const [],
-        // supportedLocales: const [
-        //   Locale('vi', 'VN'),
-        // ],
-      );}
-    );
+        designSize: const Size(390, 844), // iPhone 12 Pro kích thước tham chiếu
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return MaterialApp.router(
+            routerConfig: _router,
+            debugShowCheckedModeBanner: false,
+            builder: (context, widget) {
+              // Quan trọng: gắn MediaQuery để cập nhật scale cho toàn app
+              // ScreenUtil.setContext(context);
+              return widget!;
+            },
+            // locale: const Locale('vi', 'VN'),
+            localizationsDelegates: const [],
+            // supportedLocales: const [
+            //   Locale('vi', 'VN'),
+            // ],
+          );
+        });
   }
 
   void retrieveToken() async {
@@ -81,6 +82,10 @@ class _AppPageState extends State<AppPage> {
           return StartScreen();
         },
       ),
+      GoRoute(
+        path: '/search',
+        builder: (context, state) => const SearchScreen(),
+      ),
 
       GoRoute(
         path: '/profile_screen',
@@ -89,17 +94,18 @@ class _AppPageState extends State<AppPage> {
         },
       ),
 
-
       GoRoute(
         path: '/main_screen',
         builder: (BuildContext context, GoRouterState state) {
           return MainScreen();
         },
       ),
-      
-      GoRoute(path: '/advise_screen', builder: (context, state) {
-        return AdviseScreen();
-      }),
+
+      GoRoute(
+          path: '/advise_screen',
+          builder: (context, state) {
+            return AdviseScreen();
+          }),
 
       GoRoute(
         path: '/reading_chapter',
@@ -117,8 +123,7 @@ class _AppPageState extends State<AppPage> {
           path: '/library-book-screen',
           builder: (context, state) {
             return LibraryBookScreen();
-          }
-      ),
+          }),
       // GoRoute(
       //   path: '/',
       //   builder: (BuildContext context, GoRouterState state) {
@@ -146,12 +151,11 @@ class _AppPageState extends State<AppPage> {
       //   },
       // ),
 
-
       GoRoute(
-        path: '/ranking_screen',
-        builder: (context, state) {
-        return RankingScreen();
-      }),
+          path: '/ranking_screen',
+          builder: (context, state) {
+            return RankingScreen();
+          }),
 
       GoRoute(
         path: '/user_profile_screen',
@@ -178,20 +182,22 @@ class _AppPageState extends State<AppPage> {
       GoRoute(
           path: '/home_screen',
           builder: (context, state) {
-            return  HomeScreen();
+            return HomeScreen();
           }),
       GoRoute(
           path: '/bookscreen',
           builder: (context, state) {
             return BookScreen();
           }),
-      GoRoute(path: '/book_details_screen', builder: (context, state) {
-        // final bookId = state.uri.queryParameters['bookId']!;
-        return BookDetailsScreen();
+      GoRoute(
+          path: '/book_details_screen',
+          builder: (context, state) {
+            // final bookId = state.uri.queryParameters['bookId']!;
+            return BookDetailsScreen();
 
-      //  GoRoute(path: '/ranking_screen', builder: (context, state) {
-      //   return RankingScreen();
-      }),
+            //  GoRoute(path: '/ranking_screen', builder: (context, state) {
+            //   return RankingScreen();
+          }),
     ],
   );
 }

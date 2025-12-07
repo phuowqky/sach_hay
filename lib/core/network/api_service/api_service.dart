@@ -5,6 +5,7 @@ import 'package:sach_hay/data/models/bookmark_model/bookmark_model.dart';
 import 'package:sach_hay/data/models/chapter_model/chapter_model.dart';
 import 'package:sach_hay/data/models/chapter_model/list_chapter_model.dart';
 import 'package:sach_hay/data/models/chat_model/message_request_model.dart';
+import 'package:sach_hay/data/models/search_model/search_response_model.dart';
 import 'package:sach_hay/data/models/trending_books/trending_book_model.dart';
 import 'dart:typed_data';
 import '../../../data/models/book_model/book_model.dart';
@@ -80,17 +81,20 @@ abstract class ApiService {
 
   @GET('/api/auth/me')
   Future<ApiResponse<LoginModel>> getUserProfile(
-      @Header("Authorization") String token,
-      );
-  
+    @Header("Authorization") String token,
+  );
+
   @GET('/api/auth/avatar')
   Future<ApiResponse<UserModel>> getAvatar(
-      @Header("Authorization") String token,
-      );
+    @Header("Authorization") String token,
+  );
 
   @PUT("/api/auth/update")
   Future<ApiResponse<UserModel>> updateUser(
-      @Header("Authorization") String token,
-      @Body() UserModel update);
+      @Header("Authorization") String token, @Body() UserModel update);
 
+  @GET("/api/search")
+  Future<ApiResponseV2<SearchResponseModel>> searchBooks(
+    @Query("q") String keyword,
+  );
 }
