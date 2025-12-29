@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/theme/app_colors.dart';
@@ -77,10 +75,46 @@ class LoadingOverlay extends StatelessWidget {
     );
   }
 
+//   Widget _buildStatus(bool isSuccess, String message) {
+//     return Container(
+//
+//       key: const ValueKey('status'),
+//       padding: EdgeInsets.all(24.r),
+//       decoration: BoxDecoration(
+//         color: Colors.white,
+//         borderRadius: BorderRadius.circular(12.r),
+//       ),
+//       child: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Icon(
+//             isSuccess ? Icons.check_circle : Icons.cancel,
+//             color: isSuccess ? Colors.green : Colors.red,
+//             size: 48.w,
+//           ),
+//           SizedBox(height: 16.h),
+//           Center(
+//             child: Text(
+//               message,
+//               style: AppTextStyles.bodyLarge.copyWith(
+//                 color: isSuccess ? Colors.green : Colors.red,
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
   Widget _buildStatus(bool isSuccess, String message) {
     return Container(
-
       key: const ValueKey('status'),
+      width: 280.w, // giống _buildLoading
+      constraints: BoxConstraints(
+        minHeight: 160.h,
+        maxHeight: 200.h,
+      ),
       padding: EdgeInsets.all(24.r),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -95,11 +129,14 @@ class LoadingOverlay extends StatelessWidget {
             size: 48.w,
           ),
           SizedBox(height: 16.h),
-          Center(
-            child: Text(
-              message,
-              style: AppTextStyles.bodyLarge.copyWith(
-                color: isSuccess ? Colors.green : Colors.red,
+          Expanded(
+            child: SingleChildScrollView(
+              child: Text(
+                message,
+                style: AppTextStyles.bodyLarge.copyWith(
+                  color: isSuccess ? Colors.green : Colors.red,
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),

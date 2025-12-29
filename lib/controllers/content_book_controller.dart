@@ -101,11 +101,27 @@ class ContentBookController extends GetxController {
   //   }
   // }
 
+  // Future<void> speakLongText(String text) async {
+  //   final chunks = splitText(text);
+  //
+  //   for (final part in chunks) {
+  //     if (_isStopped) break; // nếu người dùng stop, thoát vòng lặp
+  //
+  //     await tts.speak(part);
+  //     await Future.delayed(Duration(milliseconds: 200));
+  //     await onComplete(); // đợi đọc xong chunk hiện tại
+  //   }
+  // }
+
   Future<void> speakLongText(String text) async {
     final chunks = splitText(text);
 
-    for (final part in chunks) {
+    for (int i = 0; i < chunks.length; i++) {
+      final part = chunks[i];
       if (_isStopped) break; // nếu người dùng stop, thoát vòng lặp
+
+      log("Đang đọc chunk #${i + 1}: $part"); // log toàn bộ nội dung chunk
+
       await tts.speak(part);
       await Future.delayed(Duration(milliseconds: 200));
       await onComplete(); // đợi đọc xong chunk hiện tại

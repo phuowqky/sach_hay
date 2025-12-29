@@ -62,8 +62,8 @@ class _LoginScreenState extends State<LoginScreen> {
         return LoadingOverlay(
           isLoading: controller.isLoading.value,
           // successText: controller.successText.value,
-          // isSuccess: controller.isSuccess.value,
-          // statusText: controller.successText.value,
+          isSuccess: controller.isSuccess.value,
+          statusText: controller.successText.value,
           loadingText: "Đang đăng nhập...",
 
           child: SafeArea(

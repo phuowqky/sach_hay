@@ -1,6 +1,3 @@
-
-
-
 import 'dart:developer';
 import 'dart:ui';
 
@@ -11,7 +8,6 @@ import 'package:go_router/go_router.dart';
 import 'package:sach_hay/controllers/book_controller.dart';
 import 'package:sach_hay/controllers/chapter_controller.dart';
 import 'package:sach_hay/data/storage/user_storage.dart';
-
 
 import '../../core/theme/app_colors.dart';
 import 'book_render_screen.dart';
@@ -56,34 +52,34 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
 
         return Stack(
           children: [
-                Image.network(
-      book.coverImage ?? '', // 🟢 truyền biến URL
-      fit: BoxFit.cover,
-      width: double.infinity,
-      height: double.infinity,
-      loadingBuilder: (context, child, loadingProgress) {
-        if (loadingProgress == null) return child;
-        return const Center(child: CircularProgressIndicator());
-      },
-      errorBuilder: (context, error, stackTrace) {
-        return Container(
-          color: Colors.grey[300],
-          alignment: Alignment.center,
-          child: const Icon(Icons.broken_image, size: 80, color: Colors.grey),
-        );
-      },
-    ),
+            Image.network(
+              book.coverImage ?? '', // 🟢 truyền biến URL
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const Center(child: CircularProgressIndicator());
+              },
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  color: Colors.grey[300],
+                  alignment: Alignment.center,
+                  child: const Icon(Icons.broken_image,
+                      size: 80, color: Colors.grey),
+                );
+              },
+            ),
 
-    // Làm mờ ảnh nền
-    BackdropFilter(
-      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-      child: Container(
-        color: Colors.black.withOpacity(0.2),
-      ),
-    ),
+            // Làm mờ ảnh nền
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                color: Colors.black.withOpacity(0.2),
+              ),
+            ),
             // Background with gradient
             Container(
-
               child: SafeArea(
                 child: Column(
                   children: [
@@ -113,8 +109,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                             //     ),
                             //   ],
                             // ),
-                            child:  InkWell(
-                              onTap: (){
+                            child: InkWell(
+                              onTap: () {
                                 context.pop();
                               },
                               child: Icon(
@@ -182,7 +178,6 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       child: Text(
                         book.title ?? 'Không có tên sách',
-                        
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 26,
@@ -199,7 +194,6 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                       ),
                     ),
                     const SizedBox(height: 6),
-                    
 
                     Text(
                       book.author ?? 'Không rõ tác giả',
@@ -217,8 +211,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          _buildEnhancedStatItem(
-                              'Trạng thái', '${book.status}', Icons.check_circle),
+                          _buildEnhancedStatItem('Trạng thái', '${book.status}',
+                              Icons.check_circle),
                           Container(
                             height: 50,
                             width: 1,
@@ -235,7 +229,9 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                             ),
                           ),
                           _buildEnhancedStatItem(
-                              'Trang', '${book.totalPages}', Icons.menu_book),
+                              'Số chương',
+                              '${chapterController.chapters.length}',
+                              Icons.menu_book),
                           Container(
                             height: 50,
                             width: 1,
@@ -376,8 +372,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                                     );
                                   }
 
-                                  final chapters =
-                                      chapterController.chapters;
+                                  final chapters = chapterController.chapters;
 
                                   if (chapters.isEmpty) {
                                     return Center(
@@ -434,7 +429,8 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                                             ),
                                           ),
                                           title: Text(
-                                            chapter.title ?? 'Chương ${index + 1}',
+                                            chapter.title ??
+                                                'Chương ${index + 1}',
                                             style: const TextStyle(
                                               color: Colors.black87,
                                               fontSize: 15,
@@ -448,9 +444,11 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                                           onTap: () {
                                             // Điều hướng đến trang đọc chương
                                             // Get.to(() => EpubRenderScreen());
-                                            final bookId = book.id ?? book.id ?? '';
+                                            final bookId =
+                                                book.id ?? book.id ?? '';
                                             final chapterIndexToOpen = index;
-                                            context.push('/reading_chapter?bookId=$bookId&index=$index');
+                                            context.push(
+                                                '/reading_chapter?bookId=$bookId&index=$index');
 
                                             // Get.to(() => ReadingChapterScreen(),
                                             //   arguments: {
@@ -511,9 +509,12 @@ class _BookDetailsScreenState extends State<BookDetailsScreen>
                                     child: Center(
                                       child: InkWell(
                                         onTap: () {
-                                          final bookId = bookscontroller.bookDetails.value?.id ?? '';
+                                          final bookId = bookscontroller
+                                                  .bookDetails.value?.id ??
+                                              '';
 
-                                          context.push('/reading_chapter?bookId=$bookId&index=0');
+                                          context.push(
+                                              '/reading_chapter?bookId=$bookId&index=0');
                                         },
                                         child: const Row(
                                           mainAxisAlignment:

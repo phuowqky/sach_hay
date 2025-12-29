@@ -18,7 +18,10 @@ class SearchScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         elevation: 0,
-        title: const Text("Tìm kiếm sách"),
+        title: Text(
+          "Tìm kiếm sách", style: AppTextStyles.h6,
+
+        ),
       ),
       body: Column(
         children: [

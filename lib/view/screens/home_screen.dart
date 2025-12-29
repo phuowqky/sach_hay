@@ -613,7 +613,7 @@ import '../widget/category_item.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String homeScreen = '/home_screen';
-  HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({super.key});
   final controller = Get.put(HomeController());
   final PageController _pageController = PageController();
   final List<Map<String, dynamic>> categories = [
@@ -622,31 +622,31 @@ class HomeScreen extends StatelessWidget {
       'label': 'Tất cả',
       'route': '/bookscreen'
     },
-    {
-      'icon': 'assets/images/in-love.png',
-      'label': 'Lãng mạn',
-      'route': '/romance'
-    },
-    {
-      'icon': 'assets/images/fairytale.png',
-      'label': 'Tiểu thuyết',
-      'route': '/novel'
-    },
-    {
-      'icon': 'assets/images/boy.png',
-      'label': 'Thiếu nhi',
-      'route': '/children'
-    },
-    {
-      'icon': 'assets/images/science.png',
-      'label': 'Khoa học',
-      'route': '/science'
-    },
-    {
-      'icon': 'assets/images/education.png',
-      'label': 'Giáo dục',
-      'route': '/education'
-    },
+    // {
+    //   'icon': 'assets/images/in-love.png',
+    //   'label': 'Lãng mạn',
+    //   'route': '/romance'
+    // },
+    // {
+    //   'icon': 'assets/images/fairytale.png',
+    //   'label': 'Tiểu thuyết',
+    //   'route': '/novel'
+    // },
+    // {
+    //   'icon': 'assets/images/boy.png',
+    //   'label': 'Thiếu nhi',
+    //   'route': '/children'
+    // },
+    // {
+    //   'icon': 'assets/images/science.png',
+    //   'label': 'Khoa học',
+    //   'route': '/science'
+    // },
+    // {
+    //   'icon': 'assets/images/education.png',
+    //   'label': 'Giáo dục',
+    //   'route': '/education'
+    // },
   ];
 
   @override
@@ -696,7 +696,7 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(
                           height: AppSizes.space32,
                         ),
-                        Container(
+                        Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -720,38 +720,36 @@ class HomeScreen extends StatelessWidget {
                         // Dòng chào buổi sáng
                         GestureDetector(
                           onTap: () => context.push('/search'),
-                          child: Container(
-                            child: Center(
-                              child: Stack(
-                                  alignment: Alignment
-                                      .centerLeft, // căn vị trí icon bên trái (hoặc center)
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(16),
-                                        color: Colors.white,
-                                      ),
-                                      height: 40,
-                                      width: double.infinity,
+                          child: Center(
+                            child: Stack(
+                                alignment: Alignment
+                                    .centerLeft, // căn vị trí icon bên trái (hoặc center)
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16),
+                                      color: Colors.white,
                                     ),
-                                    const Padding(
-                                      padding: EdgeInsets.only(left: 16),
-                                      child: Icon(
-                                        Icons.search,
-                                        color: AppColors.black,
-                                        size: 28,
-                                      ),
+                                    height: 40,
+                                    width: double.infinity,
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 16),
+                                    child: Icon(
+                                      Icons.search,
+                                      color: AppColors.black,
+                                      size: 28,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 56),
-                                      child: Text(
-                                        'Tìm kiếm sách, tác giả, thể loại...',
-                                        style: AppTextStyles.bodyMedium
-                                            .copyWith(color: AppColors.grey600),
-                                      ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 56),
+                                    child: Text(
+                                      'Tìm kiếm sách, tác giả, thể loại...',
+                                      style: AppTextStyles.bodyMedium
+                                          .copyWith(color: AppColors.grey600),
                                     ),
-                                  ]),
-                            ),
+                                  ),
+                                ]),
                           ),
                         ),
                         SizedBox(height: AppSizes.space24),
@@ -793,6 +791,9 @@ class HomeScreen extends StatelessWidget {
               if (controller.isLoading.value) {
                 return const Center(child: CircularProgressIndicator());
               }
+              if (controller.banners.isEmpty) {
+                return const Text("Không có banner"); // hoặc shimmer/loading
+              }
               return Center(
                 child: Column(
                   children: [
@@ -822,15 +823,18 @@ class HomeScreen extends StatelessWidget {
                               })),
                     ),
                     const SizedBox(height: 12),
-                    SmoothPageIndicator(
-                      controller: _pageController,
-                      count: controller.banners.length,
-                      effect: WormEffect(
-                        activeDotColor: Colors.blueAccent,
-                        dotColor: Colors.grey.shade300,
-                        dotHeight: 8,
-                        dotWidth: 8,
-                        spacing: 6,
+                    SizedBox(
+                      height: 20,
+                      child: SmoothPageIndicator(
+                        controller: _pageController,
+                        count: controller.banners.length,
+                        effect: WormEffect(
+                          activeDotColor: Colors.blueAccent,
+                          dotColor: Colors.grey.shade300,
+                          dotHeight: 8,
+                          dotWidth: 8,
+                          spacing: 6,
+                        ),
                       ),
                     ),
                   ],
@@ -1041,7 +1045,7 @@ class HomeScreen extends StatelessWidget {
 
             // Khám phá thể loại
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppSizes.space16),
                 child: Text(
@@ -1131,7 +1135,7 @@ class HomeScreen extends StatelessWidget {
                         //   ),
                         // ),
                         child: Container(
-                          margin: EdgeInsets.symmetric(
+                          margin: const EdgeInsets.symmetric(
                               horizontal: 6), // Giảm từ 8 xuống 6
                           decoration: BoxDecoration(
                             color: AppColors.white,
@@ -1197,7 +1201,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: AppSizes.space32),
             // Sách nổi bật
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -1226,7 +1230,7 @@ class HomeScreen extends StatelessWidget {
                 return const Center(child: Text('Không có sách nổi bật'));
               }
               return Container(
-                margin: EdgeInsets.symmetric(horizontal: 16),
+                margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: SizedBox(
                   height: 150.h,
                   child: ListView.builder(
@@ -1242,9 +1246,9 @@ class HomeScreen extends StatelessWidget {
                           context.push('/book_details_screen');
                         },
                         child: Container(
-                          margin: EdgeInsets.only(right: 12),
+                          margin: const EdgeInsets.only(right: 12),
                           decoration: BoxDecoration(
-                            color: Color(0xFFE3F2FD),
+                            color: const Color(0xFFE3F2FD),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           padding: const EdgeInsets.all(14),
@@ -1315,7 +1319,7 @@ class HomeScreen extends StatelessWidget {
                                           book.averageRating
                                                   ?.toStringAsFixed(1) ??
                                               '0.0',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
