@@ -12,6 +12,7 @@ import '../../../data/models/book_model/book_model.dart';
 import '../../../data/models/login/login_model.dart';
 import '../../../data/models/new_book_model/new_book_model.dart';
 import '../../../data/models/random_book_model/random_book_model.dart';
+import '../../../data/models/ranking/ranking_model.dart';
 import '../../../data/models/signup/register_model.dart';
 import '../api_response/api_response.dart';
 import '../api_response/api_response_v2.dart';
@@ -97,4 +98,7 @@ abstract class ApiService {
   Future<ApiResponseV2<SearchResponseModel>> searchBooks(
     @Query("q") String keyword,
   );
+
+  @GET("/api/ranking")
+  Future<ApiResponse<List<RankingModel>>> getRanking();
 }
